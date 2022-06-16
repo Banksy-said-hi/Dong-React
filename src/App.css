@@ -1,0 +1,149 @@
+.App {
+  text-align: center;
+  min-height: 150vh;
+  background-color: hsl(220, 91%, 56%);
+  color: rgb(5, 10, 0);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-home {
+  background-color: hsl(220, 91%, 56%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(24px + 2vmin);
+  color: rgb(5, 10, 0);
+}
+
+.App-header {
+  background-color: hsl(220, 91%, 56%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(4px + 2vmin);
+  color: rgb(225, 245, 208);
+}
+
+.App-header0 {
+  background-color: rgb(170, 205, 235);
+  min-height: 28vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(4px + 2vmin);
+  color: rgb(225, 245, 208);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button {
+  background-color: #000000;
+  border: none;
+  color: rgb(202, 215, 233);
+  padding: 12px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 24px;
+  border-color: #16b88f;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.div0 {
+  width: 350px;
+  padding: 6px;
+  border: 5px solid #0acf0a;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 24px;
+  background-color: #07ecd9;
+}
+
+.div00 {
+  width: 700px;
+  padding: 6px;
+  border: 5px solid rgb(4, 18, 39);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 24px;
+  background-color: #0acf0a;
+}
+
+.div1 {
+  width: 700px;
+  padding: 15px;
+  border: 5px solid rgb(197, 207, 221);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 28px;
+  background-color: #0acf0a;
+  color: rgb(18, 33, 6);
+}
+
+.text {
+  font-size: 21px;
+}
+
+input[type="number"] {
+  width: 50%;
+  padding: 20px 20px;
+  margin: 0px 15px;
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.input {
+  width: 400px;
+  padding: 20px 20px;
+  border: 5px solid rgb(2, 32, 77);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}

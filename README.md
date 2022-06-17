@@ -1,4 +1,4 @@
-# Decentralized bill splitting application - DONG
+# Decentralized Bill Splitting Application - DONG
 
 This platfrom is empowered by Solidity smart contracts, Ethers.js, Hardhat, and React.js.
 

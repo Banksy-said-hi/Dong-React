@@ -8,13 +8,13 @@ Basically, users can interact with this platform in main two ways:
 
 1- Creation: they can create a customized smart contract for a specific reason, capable of accepting funds from members and keeping track of the procedure of gathering money. Contract creation must be done by a user selected from the group. 4 attributes must be specified while creating a new smart contract:
 
-  a) Beneficiary Address: wallet address/public ID of the admin who will consume the accumulated money later, or the owner of the facility the intend to use
-  
-  b) Beneficiary Name: Name of the admin or the owner
-  
-  c) Amount: The total amount of money ( in ETH ) that is estimated to be spent 
-  
-  d) Number of Contributors: Total number of people who will attend this event
+      a) Beneficiary Address: wallet address/public ID of the admin who will consume the accumulated money later, or the owner of the facility the intend to use
+
+      b) Beneficiary Name: Name of the admin or the owner
+
+      c) Amount: The total amount of money ( in ETH ) that is estimated to be spent 
+
+      d) Number of Contributors: Total number of people who will attend this event
   
   
   

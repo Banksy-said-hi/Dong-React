@@ -2,7 +2,7 @@
 
 This platfrom is empowered by Solidity smart contracts, Ethers.js, Hardhat, and React.js.
 
-It has meant to help a group of people who want to do an activity together with dividing the entire bill into equal shares that need to be paid by whoever wants to accompany the group in the scheduled event. 
+It has meant to help a group of people who want to do an activity together with dividing the entire bill into equal shares that are needed to be paid by whoever wants to accompany the group in the scheduled event. 
 
 Basically, users can interact with this platform in main two ways:
 

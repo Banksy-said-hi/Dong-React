@@ -20,7 +20,7 @@ Basically, users can interact with this platform in main two ways:
   
 2 ==> Payment: Once a smart contract is created by an admin according to a particular situation, address of the generated contract must be shared with the members letting them to load that specific contract and pay their calculated share after navigating to the payment page. 
 
-      a) Contract address
+      a) Contract Address
 
 Each user who intends to pay a share has to provide a name ( string ) while paying the amount, allowing the contarct record names of the users who have paid their share. Whenever data is refreshed, name of the contributors will be printed within the console.
 

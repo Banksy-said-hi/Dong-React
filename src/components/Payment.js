@@ -4,10 +4,10 @@ import DongAbi from "../DongAbi.json";
 import { Link } from "react-router-dom";
 
 
-
 function Payment() {
 
     const [contractAddress, setContractAddress] = useState(null);
+    const [walletAddress, setWalletAddress] = useState(null);
     const [name, setName] = useState(null);
     const [totalRemainingAmount, setTotalRemainingAmount] = useState(null);
     const [dong, setDong] = useState(null);
@@ -16,6 +16,8 @@ function Payment() {
     const [beneficiaryName, setBeneficiaryName] = useState(null);
     const [beneficiaryAddress, setBeneficiaryAddress] = useState(null);
 
+//=======================================================
+// PayDong form handler
 
     const handleChange = (event) => {
         const data = event.target.value;
@@ -46,6 +48,9 @@ function Payment() {
         }
     }
 
+//=======================================================
+// Load contract handler
+
     const handleLoadAddressChange = (event) => {
         const data = event.target.value;
         setContractAddress(data);
@@ -56,6 +61,7 @@ function Payment() {
         if (window.ethereum) {
             window.ethereum.request({ method: "eth_requestAccounts" })
                 .then(result => {
+                    setWalletAddress(result[0]);
                     updateData(result[0]);
                 });
         } else {
@@ -110,7 +116,7 @@ function Payment() {
             <br></br>
             <br></br>
             <form>
-                <p>Put your contract address in the below box and click the load contarct button</p>
+                <p>First, put your contract address in the below box and click the load contarct button</p>
                 <input className="input" placeholder="Paste the contract address here!" onChange={handleLoadAddressChange}></input><br></br>
                 <button className="button" onClick={loadContract}>Load contract</button><br></br>
             </form>
@@ -127,6 +133,8 @@ function Payment() {
                 <input className="input" placeholder="Please type your name here!" onChange={handleChange}></input>
                 <input className="button" type="submit" value="Pay Dong"></input><br></br>
             </form>
+
+            <button className="button" onClick={loadContract}>Refresh Data</button>
             <br></br>
             <div className="div0">
                 <p className="text">Total contributors</p>

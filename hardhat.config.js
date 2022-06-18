@@ -1,5 +1,9 @@
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config();
+// require("@nomiclabs/hardhat-ethers");
+// require("@nomiclabs/hardhat-etherscan");
 
+const { API_URL, PRIVATE_KEY } = process.env;
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -17,10 +21,20 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
+  // defaultNetwork: "matic",
+  // networks: {
+  //   hardhat: {
+  //   },
+  //   matic: {
+  //     url: "https://rpc-mumbai.maticvigil.com",
+  //     accounts: [process.env.PRIVATE_KEY]
+  //   }
+  // },
   solidity: "0.8.0",
   networks: {
-    hardhat: {
-      chainId: 1337,
+    mumbai: {
+      url: API_URL,
+      accounts: [`0x${PRIVATE_KEY}`]
     },
   },
 };

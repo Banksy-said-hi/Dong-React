@@ -67,7 +67,7 @@ function Creation() {
             <div className="div1">
                 <p>Contract Address:  <b>{newContract}</b></p>
             </div>
-            <p>Copy the above address to paste it on the payment page</p>
+            <p><b>Make sure to copy the above address</b></p>
             <p>Once you are ready to pay a share click the below button</p>
             <Link to="/payment"><button className="button">Payment Page</button></Link>
         </div>

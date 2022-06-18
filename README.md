@@ -2,7 +2,7 @@
 
 This platfrom is empowered by Solidity smart contracts, Ethers.js, Hardhat, and React.js. You can interact with this platfrom on Mumbai testnet of Polygon network. Before taking any action make sure to fill your bags with some MATIC from the below faucet:
 
-      wwww.mumbaifaucet.com
+wwww.mumbaifaucet.com
 
 It has meant to help a group of people who want to do an activity together with dividing the entire bill into equal shares that are needed to be paid by whoever wants to accompany the group in the scheduled event. 
 

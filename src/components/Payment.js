@@ -1,12 +1,16 @@
-import React,{useState} from "react";
+import React,{useState, useEffect, lengthOf} from "react";
 import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
-import { Link } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
+
+
 
 
 function Payment() {
 
     const [contractAddress, setContractAddress] = useState(null);
+    const [instance, setInstance] = useState(null);
     const [walletAddress, setWalletAddress] = useState(null);
     const [name, setName] = useState(null);
     const [totalRemainingAmount, setTotalRemainingAmount] = useState(null);
@@ -30,6 +34,7 @@ function Payment() {
             alert("Oh, Sorry! You need to specify your contract address first");
         } else {
             if (window.ethereum) {
+                console.log(`${name} is trying to pay ${dong} Matic tokens`)
                 try {
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
             
@@ -39,6 +44,10 @@ function Payment() {
     
                     const response = await contract.payDong(name, {value: utils.parseEther(dong)});
                     console.log("response: ", response);
+                    setTimeout(() => {
+                        console.log("Updating data after 20 seconds");
+                        updateData(instance);
+                    }, 20000);
                 } catch (err) {
                     console.log("error: ", err);
                 }
@@ -58,35 +67,40 @@ function Payment() {
 
     const loadContract = (event) => {
         event.preventDefault();
+        console.log("Trying to fetch data ...");
         if (window.ethereum) {
             window.ethereum.request({ method: "eth_requestAccounts" })
                 .then(result => {
                     setWalletAddress(result[0]);
-                    updateData(result[0]);
+                    getContract(contractAddress);
                 });
         } else {
             alert("You need to install Metamask first!");
         }
     }
 
-    const updateData = async (address) => {
-
+    const getContract = async (contractAddress) => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-        // const signer = provider.getSigner();
-
         const instance = new ethers.Contract(contractAddress, DongAbi.abi, provider);
+        setInstance(instance);
+        updateData(instance);
+    }
+
+    const updateData = async (instance) => {
+        const response = await window.ethereum.request({ method: "eth_requestAccounts" })
+        const aid = response[0];
 
         const dongValue = await instance.dong();
         setDong(utils.formatEther(dongValue));
+        // 0xf35f16b7525f35884531e268f1E744B53935AF1E
 
         const totalRemaining = await instance.remainingAmount();
         setTotalRemainingAmount(utils.formatEther(totalRemaining));
 
         const totalContributors = await instance.contributors();
         setContributors(totalContributors.toString());
-
-        const totalEngaged = await instance.payment(address);
+        
+        const totalEngaged = await instance.payment(aid);
         setEngaged(utils.formatEther(totalEngaged));
 
         const beneficiary_add = await instance.beneficiary();
@@ -95,24 +109,30 @@ function Payment() {
         const beneficiary_name = await instance.beneficiaryName();
         setBeneficiaryName(beneficiary_name)
 
-        // await provider.getBalance(address).then(
-        //     (result) => {
-        //         setBalance(utils.formatEther(result));
-        //     }
-        // );
-        
+        console.log("Data successfully fetched");
+
         const helper = totalContributors - (totalRemaining/dongValue);
         for(let i = 1; i <= helper; i++) {
             const result = await instance.names(i);
-            console.log(result);
+            console.log(`Participant ${i}: ${result}`);
         }
     }
 
-    
-
+    useEffect(() => {
+        
+    })
 
     return (
-        <div className="App">
+        <div>
+
+            <br></br>
+            <br></br>
+            <Header></Header>
+            <br></br>
+            <br></br>
+
+            <hr/>
+
             <br></br>
             <br></br>
             <form>
@@ -122,12 +142,15 @@ function Payment() {
             </form>
             <br></br>
             <br></br>
-            <br></br>
 
             <div className="div00">
                 <p>Beneficiary:<br></br><b>{beneficiaryName} {beneficiaryAddress}</b></p>
                 <p>Your share: <br></br><b>{dong}</b></p>
             </div>
+            <br></br>
+            <br></br>
+            <hr/>
+
 
             <form onSubmit={handleSubmit}><br></br>
                 <input className="input" placeholder="Please type your name here!" onChange={handleChange}></input>
@@ -143,20 +166,28 @@ function Payment() {
 
             <div className="div0">
                 <p className="text">Total remaining amount</p>
-                <h4 className="text">{totalRemainingAmount} ETH</h4>
+                <h4 className="text">{totalRemainingAmount} Matic</h4>
             </div>
 
             <div className="div0">
                 <p className="text">Dong</p>
-                <h4 className="text">{dong} ETH</h4>
+                <h4 className="text">{dong} Matic</h4>
             </div>
 
             <div className="div0">
                 <p className="text">You have paid</p>
-                <h4 className="text">{engaged} ETH</h4>
+                <h4 className="text">{engaged} Matic</h4>
             </div>
-            <br></br><br></br>
-            <Link to="/creation"><button className="button">Creation Page</button></Link> 
+            
+            <br></br>
+            <br></br>
+            <hr/>
+            <br></br>
+            <br></br>
+
+            <Footer></Footer>
+            <br></br>
+            <br></br>
         </div>
     );
 }

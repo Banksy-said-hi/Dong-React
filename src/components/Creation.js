@@ -3,36 +3,20 @@ import { ethers } from "ethers";
 import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
 import { Link } from "react-router-dom";
+import QRCode from "react-qr-code";
+import Header from "./Header";
+import Footer from "./Footer";
+
 
 
 function Creation() {
 
-    const [address_c, setAddress_c] = useState(null);
-    const [name_c, setName_c] = useState(null);
-    const [amount_c, setAmount_c] = useState(null);
-    const [contributors_c, setContributors_c] = useState(null);
+    const [beneficiaryAddress, setBeneficiaryAddress] = useState(null);
+    const [beneficiaryName, setBeneficiaryName] = useState(null);
+    const [amount, setAmount] = useState(null);
+    const [contributors, setContributors] = useState(null);
 
-    const [newContract, setNewContract] = useState("No new contract!");
-
-    const handleAddressChange = (event) => {
-        const data = event.target.value;
-        setAddress_c(data);
-    };
-
-    const handleNameChange = (event) => {
-        const data = event.target.value;
-        setName_c(data);
-    };
-
-    const handleAmountChange = (event) => {
-        const data = event.target.value;
-        setAmount_c(data);
-    };
-
-    const handleContributorsChange = (event) => {
-        const data = event.target.value;
-        setContributors_c(data);
-    };
+    const [newContract, setNewContract] = useState(null);
 
     const handleContractCreation = async (event) => {
         event.preventDefault();
@@ -43,33 +27,73 @@ function Creation() {
 
         const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
 
-        const newDongContract = await factory.deploy(address_c, amount_c, contributors_c, name_c);
+        const newDongContract = await factory.deploy(beneficiaryAddress, amount, contributors, beneficiaryName);
+        console.log("Working on the deployment...");
 
         const transactionReceipt = await newDongContract.deployTransaction.wait();
 
-        setNewContract(transactionReceipt.contractAddress)
+        setNewContract(transactionReceipt.contractAddress);
+
+        console.log("Contract was deployed successfully!");
+        console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
+        console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
+        console.log("Transaction Receipt below:");
         console.log(transactionReceipt);
+
     }
 
+    let image = "";
+    if (newContract) {
+        image = <QRCode fgColor="blue" bgColor="black" size={300} value={`https://polygonscan.com/address/${newContract}`}/>
+    } else {
+        image = null
+    }
 
     return (
-        <div className="App-header">
+        <div>
+
+            <br></br>
+            <br></br>
+            <Header></Header>
+            <br></br>
+            <br></br>
+
+            <hr/>
+
+            <br></br>
             <br></br>
             <p>Provide these information to create your custom contract</p>
-            <form onSubmit={handleContractCreation}>
-                <input className="input" placeholder="Beneficiary address" onChange={handleAddressChange}></input><br></br>
-                <input className="input" placeholder="Beneficiary name" onChange={handleNameChange}></input><br></br>
-                <input className="input" placeholder="Total amount of ETH" onChange={handleAmountChange}></input><br></br>
-                <input className="input" placeholder="Number of contributors" onChange={handleContributorsChange}></input><br></br>
 
-                <input className="button" type="submit" value="Create new contract"></input><br></br>
+            <form onSubmit={handleContractCreation}>
+
+                <input className="input" placeholder="Beneficiary's MATIC address" onChange={(x) => setBeneficiaryAddress(x.target.value)}></input><br></br>
+                <input className="input" placeholder="Beneficiary's name" onChange={(x) => setBeneficiaryName(x.target.value)}></input><br></br>
+                <input className="input" placeholder="Total amount in MATIC" onChange={(x) => setAmount(x.target.value)}></input><br></br>
+                <input className="input" placeholder="Number of contributors" onChange={(x) => setContributors(x.target.value)}></input><br></br>
+
+                <input className="button" type="submit" value="Create new contract"></input><br></br><br></br>
             </form>
+            <br></br>
+            <br></br>
+
+            <hr/>
+
+            <br></br>
+            <br></br>
             <div className="div1">
-                <p>Contract Address:  <b>{newContract}</b></p>
+                <p>Contract Address:  <b>{newContract}</b></p><br></br>
+                <div>{image}</div><br></br>
             </div>
-            <p><b>Make sure to copy the above address</b></p>
-            <p>Once you are ready to pay a share click the below button</p>
-            <Link to="/payment"><button className="button">Payment Page</button></Link>
+            <br></br>
+            <br></br>
+
+            <hr/>
+
+            <br></br>
+            <br></br>
+            <Footer></Footer>
+            <br></br>
+            <br></br>
         </div>
     );
 }

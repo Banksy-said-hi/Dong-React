@@ -49,6 +49,7 @@ const Header = () => {
     return (
         <div>
             <h1>Dong Prototype</h1>
+            <h2>By Sina</h2>
             {errorMessage}
             <br></br>
             <br></br>

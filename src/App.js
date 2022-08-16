@@ -6,6 +6,9 @@ import { Switch, BrowserRouter, BrowserRouter as Router, Route, Routes } from "r
 
 // TODO:
 
+// (1) At the Home Page, design a segment where shows the network user is connected to 
+// plus the network they have to be connected to afterwards
+
 // Once the project is live on a server, change value of the QRCode JSX to 
 // the payment page link including contract address 
 
@@ -23,12 +26,12 @@ import { Switch, BrowserRouter, BrowserRouter as Router, Route, Routes } from "r
 function App() {
   return (
     <BrowserRouter>
-      <div className='App'>
-      <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/creation" element={<Creation />} />
-          <Route path="/payment" element={<Payment />} />
-      </Routes>
+      <div>
+        <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/creation" element={<Creation />} />
+            <Route path="/payment" element={<Payment />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

@@ -18,6 +18,13 @@ code {
   flex-direction: column;
 }
 
+@font-face {
+  font-family: "Silkscreen";
+  src: local("Silkscreen"),
+   url("./fonts/Silkscreen/Silkscreen-Regular.ttf") format("truetype");
+  font-weight: bold;
+  }
+
 
 
 

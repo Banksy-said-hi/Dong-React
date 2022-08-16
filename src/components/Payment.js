@@ -2,7 +2,7 @@ import React,{useState, useEffect, lengthOf} from "react";
 import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
 import Header from "./Header";
-import Footer from "./Footer";
+import WalletInfo from "./WalletInfo";
 
 
 
@@ -124,10 +124,10 @@ function Payment() {
 
     return (
         <div>
-
-            <br></br>
-            <br></br>
             <Header></Header>
+            <br></br>
+            <br></br>
+            <WalletInfo></WalletInfo>
             <br></br>
             <br></br>
 
@@ -184,8 +184,6 @@ function Payment() {
             <hr/>
             <br></br>
             <br></br>
-
-            <Footer></Footer>
             <br></br>
             <br></br>
         </div>

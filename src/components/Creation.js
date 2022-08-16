@@ -4,8 +4,8 @@ import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
 import { Link } from "react-router-dom";
 import QRCode from "react-qr-code";
+import WalletInfo from "./WalletInfo";
 import Header from "./Header";
-import Footer from "./Footer";
 
 
 
@@ -51,10 +51,10 @@ function Creation() {
 
     return (
         <div>
-
-            <br></br>
-            <br></br>
             <Header></Header>
+            <br></br>
+            <br></br>
+            <WalletInfo></WalletInfo>
             <br></br>
             <br></br>
 
@@ -91,7 +91,6 @@ function Creation() {
 
             <br></br>
             <br></br>
-            <Footer></Footer>
             <br></br>
             <br></br>
         </div>

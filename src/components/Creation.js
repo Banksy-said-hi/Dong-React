@@ -50,7 +50,6 @@ function Creation() {
 
     return (
         <div>
-            <Header></Header>
             <div>
                 <form className="form" onSubmit={handleContractCreation}>
                     <div>
@@ -81,8 +80,6 @@ function Creation() {
                     <div>{image}</div>
                 </div>
             </div>
-
-            
         </div>
     );
 }

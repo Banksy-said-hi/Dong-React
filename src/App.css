@@ -137,7 +137,6 @@
 
 .form {
   text-align: center;
-  background-color: ;
   padding-top: 100px;
   padding-bottom: 100px;
   border: 5px red solid;
@@ -150,7 +149,7 @@
 }
 
 .form input[type="text"] {
-  width: 30%;
+  width: 40%;
 }
 
 .button {
@@ -186,7 +185,6 @@
 .home-card {
   /* border: 10px solid rgb(4, 18, 39); */
   width: 100%;
-  border-bottom: 4px solid blue;
 }
 
 .home-card h1 {

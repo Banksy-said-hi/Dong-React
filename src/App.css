@@ -134,13 +134,6 @@
   padding-bottom: 15px;
 }
 
-.home-card {
-  border: 5px solid rgb(4, 18, 39);
-}
-
-/* .background {
-  background: mediumpurple;
-} */
 
 .form {
   text-align: center;
@@ -175,8 +168,9 @@
 
 .home-image {
   width: 300px;
+  height: 300px;
   padding-top: 100px;
-  float: none;
+  padding-bottom: 35px;
 }
 
 .home-container {
@@ -188,6 +182,29 @@
   left: 50px;
   right: 50px;
 }
+
+.home-card {
+  /* border: 10px solid rgb(4, 18, 39); */
+  width: 100%;
+  border-bottom: 4px solid blue;
+}
+
+.home-card h1 {
+  text-decoration: none;
+  color: red;
+  font-family: "Silkscreen";
+  font-size: 40px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.hr {
+  width: 100%;
+}
+
+
 
 
 

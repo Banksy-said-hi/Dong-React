@@ -11,19 +11,18 @@ function Home() {
 
     return (
         <div className="App">
-            <Link to="./creation">
+            <Link className="link" to="./creation">
                 <div className="home-card">
                     <h1>Contact Creation</h1>
-                    <h3>Admin</h3>
+                    <h4>For Admin</h4>
                     <img className="home-image" src={admin}></img>
                 </div>
             </Link>
-
-            <Link to="./payment">
+            <Link className="link" to="./payment">
                 <div className="home-card">
                     <h1>Payment</h1>
-                    <h3>Members</h3>
-                    <img className="home-image" src={admin}></img>
+                    <h4>For Members</h4>
+                    <img className="home-image" src={group}></img>
                 </div>
             </Link>
         </div>

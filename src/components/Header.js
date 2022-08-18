@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import faucet from "../images/faucet.png";
 
-function Header() {
+function Header(props) {
     return (
         <header>
             <nav className="nav">
@@ -11,8 +11,8 @@ function Header() {
                 <ul className="nav-items">
                     <li><Link style={{textDecoration: 'none'}} to="/creation">Contract-Creation</Link></li>
                     <li><Link style={{textDecoration: 'none'}} to="/payment">Payment</Link></li>
-                    <img src={faucet} width="30"></img>
-                    <img src={faucet} width="30"></img>
+                    {/* <img src={faucet} width="30" href="https://faucet.polygon.technology/"></img>
+                    <img src={faucet} width="30"></img> */}
                 </ul>
             </nav>
         </header>

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  min-height: 150vh;
+  min-height: 150vh; 
   background-color: hsl(220, 91%, 56%);
   color: rgb(5, 10, 0);
 }
@@ -27,28 +27,6 @@
   color: rgb(5, 10, 0);
 }
 
-.App-header {
-  background-color: hsl(220, 91%, 56%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(4px + 2vmin);
-  color: rgb(225, 245, 208);
-}
-
-.App-header0 {
-  background-color: rgb(170, 205, 235);
-  min-height: 28vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(4px + 2vmin);
-  color: rgb(225, 245, 208);
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -62,22 +40,7 @@
   }
 }
 
-.button {
-  background-color: #000000;
-  border: none;
-  color: rgb(202, 215, 233);
-  padding: 12px 26px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  border-radius: 24px;
-  border-color: #16b88f;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
-}
+
 
 .div0 {
   width: 350px;
@@ -120,12 +83,6 @@
   font-size: 21px;
 }
 
-input[type="number"] {
-  width: 50%;
-  padding: 20px 20px;
-  margin: 0px 15px;
-  box-sizing: border-box;
-}
 
 .column {
   float: left;
@@ -138,26 +95,6 @@ input[type="number"] {
   display: table;
   clear: both;
 }
-
-.input {
-  width: 400px;
-  padding: 20px 20px;
-  border: 5px solid rgb(2, 32, 77);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-
-
-/* ul {
-  list-style-type: none;
-  margin: 0;
-} */
-
-/* li {
-  display: inline;
-  padding-right: 25px;
-} */
 
 .networkDetection {
   width: 100%;
@@ -184,6 +121,7 @@ input[type="number"] {
   align-items: center;
   background-color: hsl(220, 91%, 56%);
   padding: 30px 25px;
+  box-shadow: 1px 10px 30px;
 }
 
 .nav-items > li {
@@ -195,6 +133,65 @@ input[type="number"] {
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+.home-card {
+  border: 5px solid rgb(4, 18, 39);
+  width: 100px;
+  height: 100px;
+}
+
+/* .background {
+  background: mediumpurple;
+} */
+
+.form {
+  text-align: center;
+  background-color: ;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  border: 5px red solid;
+}
+
+.form label {
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.form input[type="text"] {
+  width: 30%;
+}
+
+.button {
+  background-color: #000000;
+  color: rgb(202, 215, 233);
+  padding: 12px 26px;
+  font-size: 18px;
+  border-radius: 24px;
+  margin-top: 40px;
+}
+
+.button:hover {
+  background:blue;
+}
+
+.home-image {
+  width: 300px;
+  padding-top: 100px;
+  float: none;
+}
+
+.home-container {
+  position: relative;
+}
+
+.home-container .home-image {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+}
+
+
 
 
 

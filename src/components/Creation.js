@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { ethers } from "ethers";
 import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
-import { Link } from "react-router-dom";
 import QRCode from "react-qr-code";
 import WalletInfo from "./WalletInfo";
 import Header from "./Header";
@@ -52,47 +51,38 @@ function Creation() {
     return (
         <div>
             <Header></Header>
-            <br></br>
-            <br></br>
-            <WalletInfo></WalletInfo>
-            <br></br>
-            <br></br>
+            <div>
+                <form className="form" onSubmit={handleContractCreation}>
+                    <div>
+                        <label>Admin's wallet address</label>
+                        <input type="text" placeholder="0x326893Eb03efB342bb9CCDC47E444531f5BeD651" onChange={(x) => setBeneficiaryAddress(x.target.value)}></input>
+                    </div>
+                    
+                    <div>
+                        <label>Admin's name</label>
+                        <input type="text" placeholder="Kami" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
+                    </div>
+                    
+                    <div>
+                        <label>Total amount to be spent</label>
+                        <input type="text" placeholder="10" onChange={(x) => setAmount(x.target.value)}></input>
+                    </div>
+                    
+                    <div>
+                        <label>Number of contributors</label>
+                        <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
+                    </div>
+                    
+                    <input className="button" type="submit" value="Create new contract" ></input>
+                </form>
 
-            <hr/>
-
-            <br></br>
-            <br></br>
-            <p>Provide these information to create your custom contract</p>
-
-            <form onSubmit={handleContractCreation}>
-
-                <input className="input" placeholder="Beneficiary's MATIC address" onChange={(x) => setBeneficiaryAddress(x.target.value)}></input><br></br>
-                <input className="input" placeholder="Beneficiary's name" onChange={(x) => setBeneficiaryName(x.target.value)}></input><br></br>
-                <input className="input" placeholder="Total amount in MATIC" onChange={(x) => setAmount(x.target.value)}></input><br></br>
-                <input className="input" placeholder="Number of contributors" onChange={(x) => setContributors(x.target.value)}></input><br></br>
-
-                <input className="button" type="submit" value="Create new contract"></input><br></br><br></br>
-            </form>
-            <br></br>
-            <br></br>
-
-            <hr/>
-
-            <br></br>
-            <br></br>
-            <div className="div1">
-                <p>Contract Address:  <b>{newContract}</b></p><br></br>
-                <div>{image}</div><br></br>
+                <div className="div1">
+                    <p>Contract Address:  <b>{newContract}</b></p>
+                    <div>{image}</div>
+                </div>
             </div>
-            <br></br>
-            <br></br>
 
-            <hr/>
-
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+            
         </div>
     );
 }

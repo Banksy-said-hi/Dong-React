@@ -16,17 +16,6 @@
   }
 }
 
-.App-home {
-  background-color: hsl(220, 91%, 56%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(24px + 2vmin);
-  color: rgb(5, 10, 0);
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -146,6 +135,7 @@
   display: block;
   padding-top: 15px;
   padding-bottom: 5px;
+  font-family: "Silkscreen";
 }
 
 .form input[type="text"] {
@@ -200,6 +190,17 @@
 
 .hr {
   width: 100%;
+}
+
+.navigator-card {
+  border: 5px red solid;
+  text-align: center;
+  margin: 0;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 80px;
+  font-family: Arial Black;
+  font-weight: lighter;
 }
 
 

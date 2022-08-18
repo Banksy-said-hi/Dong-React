@@ -3,8 +3,8 @@ import { ethers } from "ethers";
 import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
 import QRCode from "react-qr-code";
-import WalletInfo from "./WalletInfo";
-import Header from "./Header";
+import { Link } from "react-router-dom";
+
 
 
 
@@ -51,6 +51,7 @@ function Creation() {
     return (
         <div>
             <div>
+                <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
                 <form className="form" onSubmit={handleContractCreation}>
                     <div>
                         <label>Admin's wallet address</label>
@@ -72,13 +73,15 @@ function Creation() {
                         <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
                     </div>
                     
-                    <input className="button" type="submit" value="Create new contract" ></input>
+                    <input className="button" type="submit" value="create new contract" ></input>
                 </form>
+                <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
 
+{/* 
                 <div className="div1">
                     <p>Contract Address:  <b>{newContract}</b></p>
                     <div>{image}</div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

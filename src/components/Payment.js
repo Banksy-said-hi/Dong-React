@@ -1,6 +1,7 @@
 import React,{useState, useEffect, lengthOf} from "react";
 import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import WalletInfo from "./WalletInfo";
 
@@ -124,17 +125,8 @@ function Payment() {
 
     return (
         <div>
-            <Header></Header>
-            <br></br>
-            <br></br>
-            <WalletInfo></WalletInfo>
-            <br></br>
-            <br></br>
-
-            <hr/>
-
-            <br></br>
-            <br></br>
+            <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
+            <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
             <form>
                 <p>First, put your contract address in the below box and click the load contarct button</p>
                 <input className="input" placeholder="Paste the contract address here!" onChange={handleLoadAddressChange}></input><br></br>

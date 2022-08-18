@@ -139,7 +139,7 @@
 }
 
 .form input[type="text"] {
-  width: 40%;
+  width: 50%;
 }
 
 .button {
@@ -160,16 +160,6 @@
   height: 300px;
   padding-top: 100px;
   padding-bottom: 35px;
-}
-
-.home-container {
-  position: relative;
-}
-
-.home-container .home-image {
-  position: absolute;
-  left: 50px;
-  right: 50px;
 }
 
 .home-card {
@@ -199,7 +189,7 @@
   padding-top: 18px;
   padding-bottom: 18px;
   font-size: 80px;
-  font-family: Arial Black;
+  font-family: "Silkscreen";
   font-weight: lighter;
 }
 

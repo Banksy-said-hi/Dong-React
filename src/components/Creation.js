@@ -73,7 +73,7 @@ function Creation() {
                         <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
                     </div>
                     
-                    <input className="button" type="submit" value="create new contract" ></input>
+                    <input className="button" type="submit" value="CREATE" ></input>
                 </form>
                 <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
 

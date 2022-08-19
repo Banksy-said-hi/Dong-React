@@ -13,7 +13,7 @@ function Home() {
         <div className="App">
             <Link className="link" to="./creation">
                 <div className="home-card">
-                    <h1>Contact Creation</h1>
+                    <h1>Contract Creation</h1>
                     <h4>For Admin</h4>
                     <img className="home-image" src={admin}></img>
                 </div>

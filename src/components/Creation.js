@@ -12,6 +12,8 @@ function Creation() {
 
     const navigate = useNavigate();
 
+    const [deploymentMessage, setDeploymentMessage] = useState("CREATE");
+
     const [beneficiaryAddress, setBeneficiaryAddress] = useState(null);
     const [beneficiaryName, setBeneficiaryName] = useState(null);
     const [amount, setAmount] = useState(null);
@@ -29,13 +31,15 @@ function Creation() {
         const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
 
         const newDongContract = await factory.deploy(beneficiaryAddress, amount, contributors, beneficiaryName);
-        console.log("Working on the deployment...");
+        console.log("Trying to deploy the contract");
+        setDeploymentMessage("WORKING ...");
 
         const transactionReceipt = await newDongContract.deployTransaction.wait();
 
         setNewContract(transactionReceipt.contractAddress);
 
         console.log("Contract was deployed successfully!");
+        setDeploymentMessage("SUCCESSFULY DEPLOYED ...");
         console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
         console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
         console.log("Transaction Receipt below:");
@@ -75,7 +79,7 @@ function Creation() {
                     <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
                 </div>
                 
-                <input className="button" type="submit" value="CREATE" ></input>
+                <input className="button" type="submit" value={deploymentMessage} ></input>
             </form>
             
             <div className="App">

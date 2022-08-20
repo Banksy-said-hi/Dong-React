@@ -13,14 +13,14 @@ function Home() {
         <div className="App">
             <Link className="link" to="./creation">
                 <div className="home-card">
-                    <h1>Contract Creation</h1>
+                    <h1>Create Dong</h1>
                     <h4>For Benenficiary</h4>
                     <img className="home-image" src={admin}></img>
                 </div>
             </Link>
             <Link className="link" to="./payment">
                 <div className="home-card">
-                    <h1>Payment</h1>
+                    <h1>Pay Dong</h1>
                     <h4>For Members</h4>
                     <img className="home-image" src={group}></img>
                 </div>

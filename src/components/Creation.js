@@ -52,24 +52,25 @@ function Creation() {
         <div>
             <div>
                 <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
+
                 <form className="form" onSubmit={handleContractCreation}>
                     <div>
-                        <label>Admin's wallet address</label>
+                        <label>Wallet address</label>
                         <input type="text" placeholder="0x326893Eb03efB342bb9CCDC47E444531f5BeD651" onChange={(x) => setBeneficiaryAddress(x.target.value)}></input>
                     </div>
                     
                     <div>
-                        <label>Admin's name</label>
+                        <label>Name</label>
                         <input type="text" placeholder="Kami" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
                     </div>
                     
                     <div>
-                        <label>Total amount to be spent</label>
+                        <label>Bill</label>
                         <input type="text" placeholder="10" onChange={(x) => setAmount(x.target.value)}></input>
                     </div>
                     
                     <div>
-                        <label>Number of contributors</label>
+                        <label>Quantity</label>
                         <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
                     </div>
                     

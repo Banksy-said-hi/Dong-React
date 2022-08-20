@@ -32,68 +32,17 @@
 
 
 .div0 {
-  width: 350px;
-  padding: 6px;
+  width: 70%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border: 5px solid #0acf0a;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   border-radius: 24px;
   background-color: #07ecd9;
+  font-family: "Silkscreen";
+  font-size: 20px;
 }
-
-.div00 {
-  width: 700px;
-  padding: 6px;
-  border: 5px solid rgb(4, 18, 39);
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 24px;
-  background-color: #0acf0a;
-}
-
-.div1 {
-  width: 700px;
-  padding: 15px;
-  border: 5px solid rgb(197, 207, 221);
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 28px;
-  background-color: #0acf0a;
-  color: rgb(18, 33, 6);
-}
-
-.text {
-  font-size: 21px;
-}
-
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.networkDetection {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 100px;
-  margin-bottom: 30px;
-  padding: 20px 20px;
-  font-size: 25px;
-}
-
 
 .nav-items {
   list-style: none;
@@ -129,6 +78,7 @@
   padding-top: 100px;
   padding-bottom: 100px;
   border: 5px red solid;
+  margin-top: 30px;
 }
 
 .form label {
@@ -191,6 +141,15 @@
   font-size: 50px;
   font-family: "Silkscreen";
   font-weight: lighter;
+}
+
+.payment-card {
+  border: 5px red solid;
+  background-color: #61dafb;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 15px;
 }
 
 

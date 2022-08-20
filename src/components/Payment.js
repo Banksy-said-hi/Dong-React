@@ -127,57 +127,43 @@ function Payment() {
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
-            <form>
-                <p>First, put your contract address in the below box and click the load contarct button</p>
-                <input className="input" placeholder="Paste the contract address here!" onChange={handleLoadAddressChange}></input><br></br>
-                <button className="button" onClick={loadContract}>Load contract</button><br></br>
+
+            <form className="form" onSubmit={loadContract}>
+                <input type="text" placeholder="contract address here!" onChange={handleLoadAddressChange}></input><br></br>
+                <input className="button" type="submit" value="LOAD CONTRACT"></input>
             </form>
-            <br></br>
+
             <br></br>
 
-            <div className="div00">
-                <p>Beneficiary:<br></br><b>{beneficiaryName} {beneficiaryAddress}</b></p>
-                <p>Your share: <br></br><b>{dong}</b></p>
+            <div className="App">
+                <div className="div0">
+                    <p>Beneficiary:<br></br><b>{beneficiaryName} {beneficiaryAddress}</b></p>
+                    <p>Your share: <br></br><b>{dong}</b></p>
+                </div>
+
+                <div className="div0">
+                    <p>Total contributors: {contributors} people</p>
+                </div>
+
+                <div className="div0">
+                    <p className="text">Total remaining amount: {totalRemainingAmount} Matic</p>
+                </div>
+
+                <div className="div0">
+                    <p className="text">Dong: {dong} Matic</p>
+                </div>
+
+                <div className="div0">
+                    <p className="text">You have paid: {engaged} Matic</p>
+                </div>
+
+                <button className="button" onClick={loadContract}>REFRESH DATA</button>
             </div>
-            <br></br>
-            <br></br>
-            <hr/>
 
-
-            <form onSubmit={handleSubmit}><br></br>
-                <input className="input" placeholder="Please type your name here!" onChange={handleChange}></input>
+            <form className="form" onSubmit={handleSubmit}>
+                <input type="text" placeholder="Please type your name here!" onChange={handleChange}></input><br></br>
                 <input className="button" type="submit" value="Pay Dong"></input><br></br>
             </form>
-
-            <button className="button" onClick={loadContract}>Refresh Data</button>
-            <br></br>
-            <div className="div0">
-                <p className="text">Total contributors</p>
-                <h4 className="text">{contributors}</h4>
-            </div>
-
-            <div className="div0">
-                <p className="text">Total remaining amount</p>
-                <h4 className="text">{totalRemainingAmount} Matic</h4>
-            </div>
-
-            <div className="div0">
-                <p className="text">Dong</p>
-                <h4 className="text">{dong} Matic</h4>
-            </div>
-
-            <div className="div0">
-                <p className="text">You have paid</p>
-                <h4 className="text">{engaged} Matic</h4>
-            </div>
-            
-            <br></br>
-            <br></br>
-            <hr/>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
         </div>
     );
 }

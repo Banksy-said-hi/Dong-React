@@ -89,7 +89,8 @@
 }
 
 .form input[type="text"] {
-  width: 50%;
+  width: 65%;
+  height: 30px;
 }
 
 .button {

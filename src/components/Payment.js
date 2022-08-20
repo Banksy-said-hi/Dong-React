@@ -129,7 +129,7 @@ function Payment() {
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
 
             <form className="form" onSubmit={loadContract}>
-                <input type="text" placeholder="contract address here!" onChange={handleLoadAddressChange}></input><br></br>
+                <input type="text" placeholder="CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
                 <input className="button" type="submit" value="LOAD CONTRACT"></input>
             </form>
 

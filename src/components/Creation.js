@@ -78,7 +78,7 @@ function Creation() {
                 </form>
                 <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
 
-{/* 
+                {/* 
                 <div className="div1">
                     <p>Contract Address:  <b>{newContract}</b></p>
                     <div>{image}</div>

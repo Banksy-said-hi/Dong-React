@@ -158,11 +158,13 @@ function Payment() {
                 </div>
 
                 <button className="button" onClick={loadContract}>REFRESH DATA</button>
+                <br></br>
+                <br></br>
             </div>
 
             <form className="form" onSubmit={handleSubmit}>
-                <input type="text" placeholder="Please type your name here!" onChange={handleChange}></input><br></br>
-                <input className="button" type="submit" value="Pay Dong"></input><br></br>
+                <input type="text" placeholder="YOUR NAME HERE!" onChange={handleChange}></input><br></br>
+                <input className="button" type="submit" value="PAY DONG"></input><br></br>
             </form>
         </div>
     );

@@ -31,10 +31,3 @@ function Home() {
   
 export default Home;
 
-
-
-            // <div className="home-container">
-            //     {/* <label>Admin</label> */}
-            //     {/* <label>Group Members</label> */}
-            //     <Link to="./payment"><img className="home-image" src={group}></img></Link>
-            // <

@@ -2,14 +2,14 @@ import React,{useState, useEffect, lengthOf} from "react";
 import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
 import { Link } from "react-router-dom";
-import Header from "./Header";
-import WalletInfo from "./WalletInfo";
+
 
 
 
 
 function Payment() {
-
+    
+    const [paidPeople, setPaidPeople] = useState([]);
     const [contractAddress, setContractAddress] = useState(null);
     const [instance, setInstance] = useState(null);
     const [walletAddress, setWalletAddress] = useState(null);
@@ -93,7 +93,6 @@ function Payment() {
 
         const dongValue = await instance.dong();
         setDong(utils.formatEther(dongValue));
-        // 0xf35f16b7525f35884531e268f1E744B53935AF1E
 
         const totalRemaining = await instance.remainingAmount();
         setTotalRemainingAmount(utils.formatEther(totalRemaining));

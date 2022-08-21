@@ -186,6 +186,10 @@ function Payment() {
                 <h1>Pay your dong here</h1>
                 <input type="text" placeholder=" YOUR NAME HERE!" onChange={handleChange}></input><br></br>
                 <input className="button" type="submit" value="PAY DONG"></input><br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
             </form>
         </div>
     );

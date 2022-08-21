@@ -59,9 +59,9 @@ function Creation() {
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
 
+            <WalletInformation></WalletInformation>
+            
             <form className="form" onSubmit={handleContractCreation}>
-
-                <WalletInformation></WalletInformation>
 
                 <div>
                     <label>Wallet address</label>

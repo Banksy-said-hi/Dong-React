@@ -141,46 +141,49 @@ function Payment() {
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
 
+            <WalletInformation></WalletInformation>
+
             <form className="form" onSubmit={loadContract}>
-                <WalletInformation></WalletInformation>
                 <input type="text" placeholder=" CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
                 <input className="button" type="submit" value={loadButtonMessage}></input>
+                <br></br>
+                <br></br>
+                <div className="App">
+                    <div className="div0">
+                        <p>Beneficiary:<br></br><b>{beneficiaryName} {beneficiaryAddress}</b></p>
+                        <p>Your share: <br></br><b>{dong}</b></p>
+                    </div>
+
+                    <div className="div0">
+                        <p>Total contributors: {contributors}</p>
+                    </div>
+
+                    <div className="div0">
+                        People who have paid: {people.map((item, index) => <h2 key={index}>{item}</h2>)}
+                    </div>
+
+                    <div className="div0">
+                        <p className="text">Total remaining amount: {totalRemainingAmount} Matic</p>
+                    </div>
+
+                    <div className="div0">
+                        <p className="text">Dong: {dong} Matic</p>
+                    </div>
+
+                    <div className="div0">
+                        <p className="text">You have paid: {engaged} Matic</p>
+                    </div>
+
+                    <button className="button" onClick={loadContract}>REFRESH DATA</button>
+                </div>
             </form>
 
             <br></br>
 
-            <div className="App">
-                <div className="div0">
-                    <p>Beneficiary:<br></br><b>{beneficiaryName} {beneficiaryAddress}</b></p>
-                    <p>Your share: <br></br><b>{dong}</b></p>
-                </div>
-
-                <div className="div0">
-                    <p>Total contributors: {contributors}</p>
-                </div>
-
-                <div className="div0">
-                    People who have paid: {people.map((item, index) => <h2 key={index}>{item}</h2>)}
-                </div>
-
-                <div className="div0">
-                    <p className="text">Total remaining amount: {totalRemainingAmount} Matic</p>
-                </div>
-
-                <div className="div0">
-                    <p className="text">Dong: {dong} Matic</p>
-                </div>
-
-                <div className="div0">
-                    <p className="text">You have paid: {engaged} Matic</p>
-                </div>
-
-                <button className="button" onClick={loadContract}>REFRESH DATA</button>
-                <br></br>
-                <br></br>
-            </div>
+            
 
             <form className="form" onSubmit={handleSubmit}>
+                <h1>Pay your dong here</h1>
                 <input type="text" placeholder=" YOUR NAME HERE!" onChange={handleChange}></input><br></br>
                 <input className="button" type="submit" value="PAY DONG"></input><br></br>
             </form>

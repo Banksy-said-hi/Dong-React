@@ -9,13 +9,11 @@ const WalletInformation = () => {
     const [connButtonText, setConnButtonText] = useState("Connect Wallet");
 
     const connectWalletHandler = () => {
-        // console.log("station 0")
         if (window.ethereum) {
             if (window.ethereum.networkVersion == 80001) {
                 window.ethereum.request({method: "eth_requestAccounts"})
                 .then(result => {
                     accountChangedHandler(result[0]);
-                    console.log(result);
                 })
             } else {
                 alert("Please change your network to Polygon Mumbai");
@@ -40,11 +38,11 @@ const WalletInformation = () => {
 
 
     return (
-        <div className="wallet-information">
-            <button className="button" onClick={connectWalletHandler}>{connButtonText}</button>
-            <p>{defaultAccount}</p>
-            <p>{userBalance} </p>
-        </div>
+            <div className="wallet-information">
+                <button className="button" onClick={connectWalletHandler}>{connButtonText}</button>
+                <p>{defaultAccount}</p>
+                <p>{userBalance} </p>
+            </div>
     )
 }
 

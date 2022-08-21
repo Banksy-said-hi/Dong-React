@@ -164,14 +164,9 @@
 }
 
 .wallet-information {
+  text-align: center;
   background-color:#61dafb;
   padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-left: 350px;
-  margin-right: 350px;
-  margin-bottom: 40px;
-  border-radius: 20px;
   font-size: 17px;
 }
 

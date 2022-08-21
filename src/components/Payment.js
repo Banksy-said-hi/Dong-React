@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 
 
 function Payment() {
-    
-    const [paidPeople, setPaidPeople] = useState([]);
+
+    const [people, setPeople] = useState([]);
+    const [loadButtonMessage, setLoadButtonMessage] = useState("LOAD CONTRACT");
+
     const [contractAddress, setContractAddress] = useState(null);
     const [instance, setInstance] = useState(null);
     const [walletAddress, setWalletAddress] = useState(null);
+
     const [name, setName] = useState(null);
     const [totalRemainingAmount, setTotalRemainingAmount] = useState(null);
     const [dong, setDong] = useState(null);
@@ -69,6 +72,7 @@ function Payment() {
     const loadContract = (event) => {
         event.preventDefault();
         console.log("Trying to fetch data ...");
+        setLoadButtonMessage("FETCHING CONTRACT DATA")
         if (window.ethereum) {
             window.ethereum.request({ method: "eth_requestAccounts" })
                 .then(result => {
@@ -110,26 +114,35 @@ function Payment() {
         setBeneficiaryName(beneficiary_name)
 
         console.log("Data successfully fetched");
+        setLoadButtonMessage("Data successfully fetched");
 
         const helper = totalContributors - (totalRemaining/dongValue);
+
         for(let i = 1; i <= helper; i++) {
             const result = await instance.names(i);
             console.log(`Participant ${i}: ${result}`);
+            if (people.includes(result) === false) {
+                people.push(result);
+            }
         }
+
+        console.log(people);
+
+        setLoadButtonMessage("LOAD CONTRACT");
     }
 
-    useEffect(() => {
-        
-    })
+    const helperfunction = () => {
+        console.log(people.includes("Sina"));
+    }
 
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
-
+            
             <form className="form" onSubmit={loadContract}>
-                <input type="text" placeholder="CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
-                <input className="button" type="submit" value="LOAD CONTRACT"></input>
+                <input type="text" placeholder=" CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
+                <input className="button" type="submit" value={loadButtonMessage}></input>
             </form>
 
             <br></br>
@@ -141,7 +154,11 @@ function Payment() {
                 </div>
 
                 <div className="div0">
-                    <p>Total contributors: {contributors} people</p>
+                    <p>Total contributors: {contributors}</p>
+                </div>
+
+                <div className="div0">
+                    <p>People who have paid: {people.map((item, index) => <h2 key={index}>{item}</h2>)}</p>
                 </div>
 
                 <div className="div0">
@@ -162,7 +179,7 @@ function Payment() {
             </div>
 
             <form className="form" onSubmit={handleSubmit}>
-                <input type="text" placeholder="YOUR NAME HERE!" onChange={handleChange}></input><br></br>
+                <input type="text" placeholder=" YOUR NAME HERE!" onChange={handleChange}></input><br></br>
                 <input className="button" type="submit" value="PAY DONG"></input><br></br>
             </form>
         </div>

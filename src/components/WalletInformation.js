@@ -26,14 +26,14 @@ const WalletInformation = () => {
     }
 
     const accountChangedHandler = (newAccount) => {
-        setDefaultAccount(`Address: ${newAccount}`);
+        setDefaultAccount(newAccount);
         getUserBalance(newAccount.toString());
     }
 
     const getUserBalance = (address) => {
         window.ethereum.request({method: "eth_getBalance", params: [address, "latest"]})
         .then(balance => {
-            setUserBalance(`Balance: ${ethers.utils.formatEther(balance).slice(0, 4)} Matic`);
+            setUserBalance(`${ethers.utils.formatEther(balance).slice(0, 4)} Matic`);
         })
         setConnButtonText("Connected")
     }

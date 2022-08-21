@@ -2,6 +2,7 @@ import React,{useState, useEffect, lengthOf} from "react";
 import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
 import { Link } from "react-router-dom";
+import WalletInformation from "./WalletInformation";
 
 
 
@@ -141,6 +142,7 @@ function Payment() {
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
 
             <form className="form" onSubmit={loadContract}>
+                <WalletInformation></WalletInformation>
                 <input type="text" placeholder=" CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
                 <input className="button" type="submit" value={loadButtonMessage}></input>
             </form>

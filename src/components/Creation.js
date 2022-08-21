@@ -7,7 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import WalletInformation from "./WalletInformation.js";
 
 
+// Replace the user wallet address to the constructor function
 
+// setTimeout for changing the successfully deployed text on the create button after the contract deployment
 
 function Creation() {
 
@@ -24,28 +26,32 @@ function Creation() {
 
     const handleContractCreation = async (event) => {
         event.preventDefault();
+        try {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+    
+            const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
+    
+            const newDongContract = await factory.deploy(beneficiaryAddress, amount, contributors, beneficiaryName);
+            console.log("Trying to deploy the contract");
+            setDeploymentMessage("WORKING ...");
+    
+            const transactionReceipt = await newDongContract.deployTransaction.wait();
+    
+            setNewContract(transactionReceipt.contractAddress);
+    
+            console.log("Contract was deployed successfully!");
+            setDeploymentMessage("SUCCESSFULY DEPLOYED ...");
+            console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
+            console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
+            console.log("Transaction Receipt below:");
+            console.log(transactionReceipt);
+            // navigate('/payment');
+        } catch {
+            alert("Something did not work!")
+        }
 
-        const signer = provider.getSigner();
-
-        const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
-
-        const newDongContract = await factory.deploy(beneficiaryAddress, amount, contributors, beneficiaryName);
-        console.log("Trying to deploy the contract");
-        setDeploymentMessage("WORKING ...");
-
-        const transactionReceipt = await newDongContract.deployTransaction.wait();
-
-        setNewContract(transactionReceipt.contractAddress);
-
-        console.log("Contract was deployed successfully!");
-        setDeploymentMessage("SUCCESSFULY DEPLOYED ...");
-        console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
-        console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
-        console.log("Transaction Receipt below:");
-        console.log(transactionReceipt);
-        // navigate('/payment');
     }
 
     let image = "";
@@ -60,7 +66,7 @@ function Creation() {
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
 
             <WalletInformation></WalletInformation>
-            
+
             <form className="form" onSubmit={handleContractCreation}>
 
                 <div>

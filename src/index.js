@@ -4,6 +4,8 @@ import './index.css';
 import App from './App.js';
 import './fonts/Silkscreen/Silkscreen-Regular.ttf';
 
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

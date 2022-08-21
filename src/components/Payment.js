@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Payment() {
 
-    const [people, setPeople] = useState([]);
+    const [people] = useState([]);
     const [loadButtonMessage, setLoadButtonMessage] = useState("LOAD CONTRACT");
 
     const [contractAddress, setContractAddress] = useState(null);
@@ -139,7 +139,7 @@ function Payment() {
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
-            
+
             <form className="form" onSubmit={loadContract}>
                 <input type="text" placeholder=" CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
                 <input className="button" type="submit" value={loadButtonMessage}></input>
@@ -158,7 +158,7 @@ function Payment() {
                 </div>
 
                 <div className="div0">
-                    <p>People who have paid: {people.map((item, index) => <h2 key={index}>{item}</h2>)}</p>
+                    People who have paid: {people.map((item, index) => <h2 key={index}>{item}</h2>)}
                 </div>
 
                 <div className="div0">

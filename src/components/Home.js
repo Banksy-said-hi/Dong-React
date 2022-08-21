@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 import admin from "../images/admin.png";
 import group from "../images/group.png";
 
 
-// import NetworkDetection from "./networkDetection";
 
 function Home() {
 

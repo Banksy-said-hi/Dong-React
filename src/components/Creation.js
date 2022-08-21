@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import { ethers } from "ethers";
+import { ethers, Wallet } from "ethers";
 import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
 import QRCode from "react-qr-code";
 import { Link, useNavigate } from "react-router-dom";
+import WalletInformation from "./WalletInformation.js";
 
 
 
@@ -59,6 +60,9 @@ function Creation() {
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
 
             <form className="form" onSubmit={handleContractCreation}>
+
+                <WalletInformation></WalletInformation>
+
                 <div>
                     <label>Wallet address</label>
                     <input type="text" placeholder="0x326893Eb03efB342bb9CCDC47E444531f5BeD651" onChange={(x) => setBeneficiaryAddress(x.target.value)}></input>

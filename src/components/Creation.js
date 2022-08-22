@@ -66,7 +66,6 @@ function Creation() {
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
-            {/* <button onClick={test}>Click here</button> */}
 
             <WalletInformation></WalletInformation>
 

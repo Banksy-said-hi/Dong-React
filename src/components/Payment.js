@@ -134,15 +134,17 @@ function Payment() {
         setLoadButtonMessage("LOAD CONTRACT");
     }
 
-    const helperfunction = () => {
-        console.log(people.includes("Sina"));
-    }
+    // const test = () => {
+    //     console.log(window.location.href);
+    //     var test = window.location.href
+    //     window.location.replace(`${test}/Sina`);
+    // }
 
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
-
+            {/* <button onClick={test}>Click here</button> */}
             <WalletInformation></WalletInformation>
 
             <form className="form" onSubmit={loadContract}>

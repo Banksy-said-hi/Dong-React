@@ -108,9 +108,9 @@
 }
 
 .home-image {
-  width: 300px;
-  height: 300px;
-  padding-top: 100px;
+  /* width: 300px; */
+  /* height: 300px; */
+  padding-top: 10px;
   padding-bottom: 35px;
 }
 
@@ -160,7 +160,7 @@
   border-radius: 24px;
   padding: 20px 15px;
   margin-top: 25px;
-  line-height: 8px;
+  line-height: 5px;
 }
 
 .wallet-information {
@@ -170,13 +170,6 @@
   font-size: 17px;
 }
 
-/* .wallet-information button {
-  font-size: 20px;
-  border-radius: 50px;
-  padding: 10px 10px;
-  background-color: white;
-  border-color: #61dafb;
-} */
 
 
 

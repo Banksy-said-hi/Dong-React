@@ -20,7 +20,7 @@ function Home() {
             <Link className="link" to="./creation">
                 <div className="home-card">
                     <h1>Create Dong</h1>
-                    <h4>For Benenficiary</h4>
+                    <h4>For Beneficiary</h4>
                     <img className="home-image" src={admin}></img>
                 </div>
             </Link>
@@ -29,7 +29,7 @@ function Home() {
                 <div className="home-card">
                     <h1>Pay Dong</h1>
                     <h4>For Members</h4>
-                    <img className="home-image" src={group}></img>
+                    <img className="home-image" src={group} width="300" height="300"></img>
                 </div>
             </Link>
 

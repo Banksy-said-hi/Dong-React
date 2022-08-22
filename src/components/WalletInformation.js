@@ -19,7 +19,7 @@ const WalletInformation = () => {
                 alert("Please change your network to Polygon Mumbai");
             }
         } else {
-            alert("Dadash!Install Metamask Please");
+            alert("Dadash install Metamask please :)");
         }
     }
 

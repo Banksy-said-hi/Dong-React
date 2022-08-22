@@ -157,7 +157,7 @@ function Payment() {
                     </div>
 
                     <div className="div0">
-                        People who have paid: {people.map((item, index) => <h2 key={index}>{item}</h2>)}
+                        People who have paid: {people.map((item, index) => <h2 key={index}>{index+1}- {item}</h2>)}
                     </div>
 
                     <div className="div0">

@@ -96,8 +96,14 @@ function Payment() {
         const response = await window.ethereum.request({ method: "eth_requestAccounts" })
         const aid = response[0];
 
+        const beneficiary_name = await instance.beneficiaryName();
+        setBeneficiaryName(beneficiary_name);
+
         const dongValue = await instance.dong();
         setDong(utils.formatEther(dongValue));
+
+        const totalEngaged = await instance.payment(aid);
+        setEngaged(utils.formatEther(totalEngaged));
 
         const totalRemaining = await instance.remainingAmount();
         setTotalRemainingAmount(utils.formatEther(totalRemaining));
@@ -105,14 +111,10 @@ function Payment() {
         const totalContributors = await instance.contributors();
         setContributors(totalContributors.toString());
         
-        const totalEngaged = await instance.payment(aid);
-        setEngaged(utils.formatEther(totalEngaged));
-
         const beneficiary_add = await instance.beneficiary();
         setBeneficiaryAddress(beneficiary_add);
 
-        const beneficiary_name = await instance.beneficiaryName();
-        setBeneficiaryName(beneficiary_name)
+
 
         console.log("Data successfully fetched");
         setLoadButtonMessage("Data successfully fetched");
@@ -150,12 +152,8 @@ function Payment() {
                 <br></br>
                 <div className="App">
                     <div className="div0">
-                        <p>Beneficiary:<br></br><b>{beneficiaryName} {beneficiaryAddress}</b></p>
+                        <p>Beneficiary Name:<br></br><b>{beneficiaryName}</b></p>
                         <p>Your share: <br></br><b>{dong}</b></p>
-                    </div>
-
-                    <div className="div0">
-                        <p>Total contributors: {contributors}</p>
                     </div>
 
                     <div className="div0">
@@ -163,15 +161,15 @@ function Payment() {
                     </div>
 
                     <div className="div0">
+                        <p className="text">You have paid: {engaged} Matic</p>
+                    </div>
+
+                    <div className="div0">
                         <p className="text">Total remaining amount: {totalRemainingAmount} Matic</p>
                     </div>
 
                     <div className="div0">
-                        <p className="text">Dong: {dong} Matic</p>
-                    </div>
-
-                    <div className="div0">
-                        <p className="text">You have paid: {engaged} Matic</p>
+                        <p>Total contributors: {contributors}</p>
                     </div>
 
                     <button className="button" onClick={loadContract}>REFRESH DATA</button>

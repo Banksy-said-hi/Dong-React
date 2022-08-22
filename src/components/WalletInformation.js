@@ -40,8 +40,7 @@ const WalletInformation = () => {
     return (
             <div className="wallet-information">
                 <button className="button" onClick={connectWalletHandler}>{connButtonText}</button>
-                <p>{defaultAccount}</p>
-                <p>{userBalance} </p>
+                <p>Your balance: <b>{userBalance}</b></p>
             </div>
     )
 }

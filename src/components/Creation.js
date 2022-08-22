@@ -7,17 +7,15 @@ import { Link, useNavigate } from "react-router-dom";
 import WalletInformation from "./WalletInformation.js";
 
 
-// Replace the user wallet address to the constructor function
 
 // setTimeout for changing the successfully deployed text on the create button after the contract deployment
 
 function Creation() {
-
+ 
     const navigate = useNavigate();
 
     const [deploymentMessage, setDeploymentMessage] = useState("CREATE");
 
-    const [beneficiaryAddress, setBeneficiaryAddress] = useState(null);
     const [beneficiaryName, setBeneficiaryName] = useState(null);
     const [amount, setAmount] = useState(null);
     const [contributors, setContributors] = useState(null);
@@ -28,12 +26,16 @@ function Creation() {
         event.preventDefault();
         try {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
-
             const signer = provider.getSigner();
-    
+
+            let address;
+            await signer.getAddress().then((x) => {
+                address = x;
+            })
+
             const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
-    
-            const newDongContract = await factory.deploy(beneficiaryAddress, amount, contributors, beneficiaryName);
+
+            const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
             console.log("Trying to deploy the contract");
             setDeploymentMessage("WORKING ...");
     
@@ -64,16 +66,11 @@ function Creation() {
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
+            {/* <button onClick={test}>Click here</button> */}
 
             <WalletInformation></WalletInformation>
 
             <form className="form" onSubmit={handleContractCreation}>
-
-                <div>
-                    <label>Wallet address</label>
-                    <input type="text" placeholder="0x326893Eb03efB342bb9CCDC47E444531f5BeD651" onChange={(x) => setBeneficiaryAddress(x.target.value)}></input>
-                </div>
-                
                 <div>
                     <label>Name</label>
                     <input type="text" placeholder="Kami" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
@@ -85,7 +82,7 @@ function Creation() {
                 </div>
                 
                 <div>
-                    <label>Quantity</label>
+                    <label>Contributors</label>
                     <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
                 </div>
                 

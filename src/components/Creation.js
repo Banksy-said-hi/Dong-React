@@ -7,9 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import WalletInformation from "./WalletInformation.js";
 
 
-
-// setTimeout for changing the successfully deployed text on the create button after the contract deployment
-
 function Creation() {
  
     const navigate = useNavigate();
@@ -101,7 +98,7 @@ function Creation() {
             </form>
             
             <div className="App">
-                <p>Contract Address:  <b>{newContract}</b></p>
+                <p><b>{newContract}</b></p>
                 <div>{image}</div>
             </div>
 

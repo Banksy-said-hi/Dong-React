@@ -83,6 +83,7 @@ function Creation() {
         image = null
     }
 
+
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>

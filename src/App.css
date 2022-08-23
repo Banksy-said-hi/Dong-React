@@ -82,11 +82,10 @@
 
 .form input[type="text"] {
   text-align: center;
+  place-items: center;
   width:90%;
   height: 50px;
   margin-top: 4px;
-  /* margin-right: 5px; */
-  place-items: center;
   border-radius: 5px;
   border: 1px rgb(160, 214, 199) solid;
 }

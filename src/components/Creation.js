@@ -24,43 +24,58 @@ function Creation() {
 
     const handleContractCreation = async (event) => {
         event.preventDefault();
+        let address;
 
-        // console.log(window.ethereum.enable());
-        if (beneficiaryName && amount && contributors) {
+        if (window.ethereum) {
             try {
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
-                let address;
-                await signer.getAddress().then((x) => {
-                    address = x;
-                })
-                console.log("Successfully got the provider, signer, and address");
-    
-                const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
-                console.log("Trying to deploy the contract");
-                const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
-                setDeploymentMessage("PLEASE WAIT 20 SECONDS");
-        
-                const transactionReceipt = await newDongContract.deployTransaction.wait();
-                console.log("Contract was deployed successfully!");
-                setNewContract(transactionReceipt.contractAddress);
-                setDeploymentMessage("SUCCESSFULY DEPLOYED ...");
-    
-                console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
-                console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
-                console.log("Transaction Receipt below:");
-                console.log(transactionReceipt);
-    
-                setTimeout(() => {
-                    setDeploymentMessage("CREATE");
-                }, 3000)
-    
-                // navigate('/payment');
+                setDeploymentMessage("CONNECTING WALLET");
+                const result = await window.ethereum.request({method: "eth_requestAccounts"});
+                address = result[0];
+                console.log(address)
+                setDeploymentMessage("WALLET IS CONNECTED");
             } catch {
-                alert("Check your internet connection, Make sure your wallet is connected");
+                alert("cannot retreive user address from the provider");
+            }
+
+            if (beneficiaryName && amount && contributors) {
+                try {
+                    setDeploymentMessage("DEPLOYING THE CONTRACT");
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+                    console.log("Successfully got the provider and signer");
+
+                    const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
+                    console.log("works fine untill here");
+                    const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
+                    console.log("Trying to deploy the contract");
+                    setDeploymentMessage("IT MAY TAKE ABOUT 20 SEC");
+
+                    const transactionReceipt = await newDongContract.deployTransaction.wait();
+                    setNewContract(transactionReceipt.contractAddress);
+                    console.log("Contract was deployed successfully!");
+                    setDeploymentMessage("SUCCESSFULY DEPLOYED");
+
+                    console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
+                    console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
+                    console.log("Transaction Receipt below:");
+                    console.log(transactionReceipt);
+
+                    setTimeout(() => {
+                        setDeploymentMessage("CREATE");
+                    }, 2000)
+                    
+                    // navigate('/payment');
+
+                } catch {
+                    alert("Failed in contract deployment");
+                    setDeploymentMessage("CREATE");
+                }
+            } else {
+                alert("Sotun, first you need to fill all three inputs correctly !");
+                setDeploymentMessage("CREATE");
             }
         } else {
-            alert("Azize delam, all three inputs needs to be filled to create a contract");
+            alert("Dadashe golam! Az Metamask wallet e gushit estefade kon!")
         }
     }
 
@@ -75,10 +90,9 @@ function Creation() {
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
-            <WalletInformation></WalletInformation>
+            {/* <WalletInformation></WalletInformation> */}
 
             <form className="form" onSubmit={handleContractCreation}>
-                <p>To create a new contract, fill out this form after connecting your wallet</p>
                 <input type="text" placeholder="Your name" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
                 <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
                 <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>

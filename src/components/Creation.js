@@ -94,7 +94,7 @@ function Creation() {
                 <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
                 <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>
                 <br></br>
-                <input className="button" type="submit" value={deploymentMessage} ></input>
+                <input className="creation-button" type="submit" value={deploymentMessage} ></input>
             </form>
             
             <div className="App">

@@ -82,16 +82,16 @@
 
 .form input[type="text"] {
   text-align: center;
-  width:30%;
+  width:90%;
   height: 50px;
   margin-top: 4px;
-  margin-right: 5px;
+  /* margin-right: 5px; */
   place-items: center;
   border-radius: 5px;
   border: 1px rgb(160, 214, 199) solid;
 }
 
-.form input[type="submit"] {
+.creation-button {
   background-color: #000000;
   color: rgb(202, 215, 233);
   padding: 20px 30px;

@@ -134,12 +134,6 @@ function Payment() {
         setLoadButtonMessage("LOAD CONTRACT");
     }
 
-    // const test = () => {
-    //     console.log(window.location.href);
-    //     var test = window.location.href
-    //     window.location.replace(`${test}/Sina`);
-    // }
-
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>

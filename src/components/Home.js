@@ -13,7 +13,7 @@ function Home() {
             <div className="home-warning">
                 <p>This platform is still in the development phase</p>
                 <p>(1) Please change your network to the <b>Polygon Mumbai</b></p>
-                <p>(2) Get some free tokens from the below faucet</p>
+                <p>(2) Get some free tokens from the faucet below</p>
                 <a href="https://mumbaifaucet.com">FAUCET</a>
             </div>
 

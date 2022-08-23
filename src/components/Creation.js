@@ -24,36 +24,44 @@ function Creation() {
 
     const handleContractCreation = async (event) => {
         event.preventDefault();
-        try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
 
-            let address;
-            await signer.getAddress().then((x) => {
-                address = x;
-            })
-
-            const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
-
-            const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
-            console.log("Trying to deploy the contract");
-            setDeploymentMessage("WORKING ...");
+        // console.log(window.ethereum.enable());
+        if (beneficiaryName && amount && contributors) {
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                let address;
+                await signer.getAddress().then((x) => {
+                    address = x;
+                })
+                console.log("Successfully got the provider, signer, and address");
     
-            const transactionReceipt = await newDongContract.deployTransaction.wait();
+                const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
+                console.log("Trying to deploy the contract");
+                const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
+                setDeploymentMessage("PLEASE WAIT 20 SECONDS");
+        
+                const transactionReceipt = await newDongContract.deployTransaction.wait();
+                console.log("Contract was deployed successfully!");
+                setNewContract(transactionReceipt.contractAddress);
+                setDeploymentMessage("SUCCESSFULY DEPLOYED ...");
     
-            setNewContract(transactionReceipt.contractAddress);
+                console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
+                console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
+                console.log("Transaction Receipt below:");
+                console.log(transactionReceipt);
     
-            console.log("Contract was deployed successfully!");
-            setDeploymentMessage("SUCCESSFULY DEPLOYED ...");
-            console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
-            console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
-            console.log("Transaction Receipt below:");
-            console.log(transactionReceipt);
-            // navigate('/payment');
-        } catch {
-            alert("Something did not work!")
+                setTimeout(() => {
+                    setDeploymentMessage("CREATE");
+                }, 3000)
+    
+                // navigate('/payment');
+            } catch {
+                alert("Check your internet connection, Make sure your wallet is connected");
+            }
+        } else {
+            alert("Azize delam, all three inputs needs to be filled to create a contract");
         }
-
     }
 
     let image = "";
@@ -66,25 +74,15 @@ function Creation() {
     return (
         <div>
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
-
+            <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
             <WalletInformation></WalletInformation>
 
             <form className="form" onSubmit={handleContractCreation}>
-                <div>
-                    <label>Name</label>
-                    <input type="text" placeholder="Kami" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
-                </div>
-                
-                <div>
-                    <label>Bill</label>
-                    <input type="text" placeholder="10" onChange={(x) => setAmount(x.target.value)}></input>
-                </div>
-                
-                <div>
-                    <label>Contributors</label>
-                    <input type="text" placeholder="4" onChange={(x) => setContributors(x.target.value)}></input>
-                </div>
-                
+                <p>To create a new contract, fill out this form after connecting your wallet</p>
+                <input type="text" placeholder="Your name" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
+                <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
+                <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>
+                <br></br>
                 <input className="button" type="submit" value={deploymentMessage} ></input>
             </form>
             
@@ -93,7 +91,6 @@ function Creation() {
                 <div>{image}</div>
             </div>
 
-            <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
         </div>
     );
 }

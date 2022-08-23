@@ -41,7 +41,6 @@
   margin-bottom: 15px;
   border-radius: 24px;
   background-color: #56f9ec;
-  /* font-family: "Inconsolata"; */
   font-size: 16px;
 }
 
@@ -81,16 +80,25 @@
   border: 5px rgb(160, 214, 199) solid;
 }
 
-.form label {
-  display: block;
-  padding-top: 15px;
-  padding-bottom: 5px;
-  /* font-family: "Silkscreen"; */
+.form input[type="text"] {
+  text-align: center;
+  width:15%;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: 5px;
+  place-items: center;
+  border-radius: 5px;
+  border: 1px rgb(160, 214, 199) solid;
 }
 
-.form input[type="text"] {
-  width: 65%;
-  height: 30px;
+.form input[type="submit"] {
+  background-color: #000000;
+  color: rgb(202, 215, 233);
+  padding: 20px 30px;
+  font-size: 40px;
+  border-radius: 24px;
+  margin-top: 50px;
+  font-family: "Silkscreen";
 }
 
 .button {
@@ -99,7 +107,7 @@
   padding: 12px 26px;
   font-size: 20px;
   border-radius: 24px;
-  margin-top: 20px;
+  margin-top: 30px;
   font-family: "Silkscreen";
 }
 

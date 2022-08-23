@@ -82,7 +82,7 @@
 
 .form input[type="text"] {
   text-align: center;
-  width:15%;
+  width:30%;
   height: 50px;
   margin-top: 10px;
   margin-right: 5px;
@@ -96,7 +96,7 @@
   color: rgb(202, 215, 233);
   padding: 20px 30px;
   font-size: 40px;
-  border-radius: 24px;
+  border-radius: 50px;
   margin-top: 50px;
   font-family: "Silkscreen";
 }

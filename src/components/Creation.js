@@ -85,7 +85,7 @@ function Creation() {
 
 
     return (
-        <div>
+        <div className="background">
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
             {/* <WalletInformation></WalletInformation> */}
@@ -95,7 +95,7 @@ function Creation() {
                 <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
                 <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>
                 <br></br>
-                <input className="creation-button" type="submit" value={deploymentMessage} ></input>
+                <input className="creation-button" type="submit" value={deploymentMessage}></input>
             </form>
             
             <div className="App">

@@ -81,6 +81,12 @@
   background-color: rgb(160, 214, 199);
 }
 
+.form h1 {
+  font-family: "Silkscreen";
+  font-size: 35px;
+  color: white;
+}
+
 .form input[type="text"] {
   text-align: center;
   place-items: center;
@@ -93,11 +99,10 @@
 
 .creation-button {
   width: 90%;
+  height: 60px;
   background-color: #000000;
-  /* color: rgb(202, 215, 233); */
-  padding: 20px 30px;
   font-size: 24px;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-top: 6px;
   font-family: "Silkscreen";
   color: #61dafb;
@@ -192,6 +197,11 @@
   background-color:#61dafb;
   padding-bottom: 5px;
   font-size: 17px;
+}
+
+.background {
+  background-color: rgb(160, 214, 199);
+  height: 1000px;
 }
 
 

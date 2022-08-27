@@ -135,7 +135,7 @@ function Payment() {
     }
 
     return (
-        <div>
+        <div className="background">
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
             {/* <button onClick={test}>Click here</button> */}
@@ -171,14 +171,11 @@ function Payment() {
                     <button className="button" onClick={loadContract}>REFRESH DATA</button>
                 </div>
             </form>
-
-            <br></br>
-
             
 
             <form className="form" onSubmit={handleSubmit}>
-                <h1>Pay your dong here</h1>
-                <input type="text" placeholder=" YOUR NAME HERE!" onChange={handleChange}></input><br></br>
+                <h1>Write your name and submit</h1>
+                <input type="text" placeholder="NAME" onChange={handleChange}></input><br></br>
                 <input className="creation-button" type="submit" value="PAY DONG"></input><br></br>
                 <br></br>
                 <br></br>

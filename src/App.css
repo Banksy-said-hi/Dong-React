@@ -83,7 +83,7 @@
 
 .form h1 {
   font-family: "Silkscreen";
-  font-size: 35px;
+  font-size: 30px;
   color: white;
 }
 
@@ -94,7 +94,7 @@
   height: 50px;
   margin-top: 4px;
   border-radius: 5px;
-  border: 1px rgb(160, 214, 199) solid;
+  border: 2.5px solid #0acf0a;
 }
 
 .creation-button {
@@ -194,7 +194,8 @@
 
 .wallet-information {
   text-align: center;
-  background-color:#61dafb;
+  /* background-color:#61dafb; */
+  background-color: #56f9ec;
   padding-bottom: 5px;
   font-size: 17px;
 }

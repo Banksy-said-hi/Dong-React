@@ -45,7 +45,7 @@ function Creation() {
                     console.log("works fine untill here");
                     const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
                     console.log("Trying to deploy the contract");
-                    setDeploymentMessage("IT MAY TAKE ABOUT 20 SEC");
+                    setDeploymentMessage("IT TAKES 20 SEC");
 
                     const transactionReceipt = await newDongContract.deployTransaction.wait();
                     setNewContract(transactionReceipt.contractAddress);

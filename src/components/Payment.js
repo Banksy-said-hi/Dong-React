@@ -143,7 +143,7 @@ function Payment() {
 
             <form className="form" onSubmit={loadContract}>
                 <input type="text" placeholder=" CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>
-                <input className="button" type="submit" value={loadButtonMessage}></input>
+                <input className="creation-button" type="submit" value={loadButtonMessage}></input>
                 <br></br>
                 <br></br>
                 <div className="App">
@@ -179,7 +179,7 @@ function Payment() {
             <form className="form" onSubmit={handleSubmit}>
                 <h1>Pay your dong here</h1>
                 <input type="text" placeholder=" YOUR NAME HERE!" onChange={handleChange}></input><br></br>
-                <input className="button" type="submit" value="PAY DONG"></input><br></br>
+                <input className="creation-button" type="submit" value="PAY DONG"></input><br></br>
                 <br></br>
                 <br></br>
                 <br></br>

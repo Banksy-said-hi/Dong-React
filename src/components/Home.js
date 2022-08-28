@@ -25,13 +25,13 @@ function Home() {
                 </div>
             </Link>
 
-            <Link className="link" to="./payment">
+            {/* <Link className="link" to="./payment">
                 <div className="home-card">
                     <h1>Pay Dong</h1>
                     <h4>Click here if you want to pay a share</h4>
                     <img className="home-image" src={group} width="300" height="300"></img>
                 </div>
-            </Link>
+            </Link> */}
 
         </div>
     );

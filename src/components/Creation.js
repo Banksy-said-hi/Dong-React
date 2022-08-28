@@ -55,7 +55,7 @@ function Creation() {
                     console.log(transactionReceipt);
 
                     // dispatch({type: "SET",payload: transactionReceipt.contractAddress});
-
+                    console.log("works fine to here!!!");
                     setTimeout(() => {
                         setDeploymentMessage("CREATE");
                     }, 2000)
@@ -79,8 +79,6 @@ function Creation() {
     return (
         <div className="background">
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
-            <hr className="hr"></hr>
-            <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
             <hr className="hr"></hr>
             <WalletInformation></WalletInformation>
 

@@ -1,9 +1,8 @@
 import React,{useState, useEffect, lengthOf} from "react";
 import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import WalletInformation from "./WalletInformation";
-import {useSelector} from "react-redux";
 import QRCode from "react-qr-code";
 
 
@@ -13,7 +12,7 @@ import QRCode from "react-qr-code";
 
 function Payment() {
 
-    const sample = useSelector((state) => state.contractAddress);
+    const { id } = useParams();
 
     const [people] = useState([]);
     const [loadButtonMessage, setLoadButtonMessage] = useState("LOAD CONTRACT");
@@ -139,24 +138,29 @@ function Payment() {
         setLoadButtonMessage("LOAD CONTRACT");
     }
 
-    // =============================================
+
     let image = "";
-    if (sample) {
-        image = <QRCode fgColor="blue" bgColor="black" size={300} value={sample}/>
+    if (id) {
+        image = <QRCode fgColor="white" bgColor="black" size={300} value={window.location.href}/>
     } else {
         image = null
     }
 
+
     return (
         <div className="background">
+
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
-            <hr></hr>
+            <hr className="hr"></hr>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
-            <hr></hr>
+            <hr className="hr"></hr>
             <WalletInformation></WalletInformation>
 
             <div className="App">
-                <p><b>{sample}</b></p>
+                {/* <p><b>{id}</b></p> */}
+                <br></br>
+                <br></br>
+                <br></br>
                 <div>{image}</div>
             </div>
 
@@ -201,6 +205,7 @@ function Payment() {
                 <br></br>
                 <br></br>
             </form>
+
         </div>
     );
 }

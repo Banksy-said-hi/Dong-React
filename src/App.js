@@ -26,13 +26,11 @@ import { Switch, BrowserRouter, BrowserRouter as Router, Route, Routes } from "r
 function App() {
   return (
     <BrowserRouter>
-      <div>
         <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/creation" element={<Creation />} />
-            <Route path="/payment" element={<Payment />} />
+            <Route path="/payment/:id" element={<Payment />} />
         </Routes>
-      </div>
     </BrowserRouter>
   );
 }

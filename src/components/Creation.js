@@ -2,22 +2,21 @@ import React, {useState} from "react";
 import { ethers, Wallet } from "ethers";
 import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
-import QRCode from "react-qr-code";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import WalletInformation from "./WalletInformation.js";
 
 
 function Creation() {
  
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [deploymentMessage, setDeploymentMessage] = useState("CREATE");
 
     const [beneficiaryName, setBeneficiaryName] = useState(null);
     const [amount, setAmount] = useState(null);
     const [contributors, setContributors] = useState(null);
-
-    const [newContract, setNewContract] = useState(null);
 
     const handleContractCreation = async (event) => {
         event.preventDefault();
@@ -48,7 +47,7 @@ function Creation() {
                     setDeploymentMessage("IT TAKES 20 SEC");
 
                     const transactionReceipt = await newDongContract.deployTransaction.wait();
-                    setNewContract(transactionReceipt.contractAddress);
+                    // setNewContract(transactionReceipt.contractAddress);
                     console.log("Contract was deployed successfully!");
                     setDeploymentMessage("SUCCESSFULY DEPLOYED");
 
@@ -57,11 +56,13 @@ function Creation() {
                     console.log("Transaction Receipt below:");
                     console.log(transactionReceipt);
 
+                    dispatch({type: "SET",payload: transactionReceipt.contractAddress});
+
                     setTimeout(() => {
                         setDeploymentMessage("CREATE");
                     }, 2000)
                     
-                    // navigate('/payment');
+                    navigate('/payment');
 
                 } catch {
                     alert("Failed in contract deployment");
@@ -76,18 +77,33 @@ function Creation() {
         }
     }
 
-    let image = "";
-    if (newContract) {
-        image = <QRCode fgColor="blue" bgColor="black" size={300} value={`https://polygonscan.com/address/${newContract}`}/>
-    } else {
-        image = null
-    }
 
+    // ====================================================
+    // const counter = useSelector((state) => state.contractAddress);
+
+    // const increment = () => {
+    //     dispatch({type: "INC"});
+    // }
+
+    // const decrement = () => {
+    //     dispatch({type: "DEC"});
+    // }
+
+    // const addBy = () => {
+    //     dispatch({type: "ADD",payload: 10});
+    // }
 
     return (
         <div className="background">
+            {/* <h1>Contract Address</h1>
+            <h2>{counter}</h2> */}
+            {/* <button onClick={increment}>Incremenet</button>
+            <button onClick={decrement}>Deccremenet</button>
+            <button onClick={addBy}>Add by 10</button> */}
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
+            <hr></hr>
             <Link className="link" to="/payment"><div className="navigator-card">Payment</div></Link>
+            <hr></hr>
             {/* <WalletInformation></WalletInformation> */}
 
             <form className="form" onSubmit={handleContractCreation}>
@@ -97,11 +113,6 @@ function Creation() {
                 <br></br>
                 <input className="creation-button" type="submit" value={deploymentMessage}></input>
             </form>
-            
-            <div className="App">
-                <p><b>{newContract}</b></p>
-                <div>{image}</div>
-            </div>
 
         </div>
     );

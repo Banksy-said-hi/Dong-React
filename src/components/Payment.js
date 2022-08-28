@@ -3,12 +3,17 @@ import {ethers, utils} from "ethers";
 import DongAbi from "../DongAbi.json";
 import { Link } from "react-router-dom";
 import WalletInformation from "./WalletInformation";
+import {useSelector} from "react-redux";
+import QRCode from "react-qr-code";
+
 
 
 
 
 
 function Payment() {
+
+    const sample = useSelector((state) => state.contractAddress);
 
     const [people] = useState([]);
     const [loadButtonMessage, setLoadButtonMessage] = useState("LOAD CONTRACT");
@@ -134,12 +139,26 @@ function Payment() {
         setLoadButtonMessage("LOAD CONTRACT");
     }
 
+    // =============================================
+    let image = "";
+    if (sample) {
+        image = <QRCode fgColor="blue" bgColor="black" size={300} value={sample}/>
+    } else {
+        image = null
+    }
+
     return (
         <div className="background">
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
+            <hr></hr>
             <Link className="link" to="/creation"><div className="navigator-card">Creation</div></Link>
-            {/* <button onClick={test}>Click here</button> */}
+            <hr></hr>
             <WalletInformation></WalletInformation>
+
+            <div className="App">
+                <p><b>{sample}</b></p>
+                <div>{image}</div>
+            </div>
 
             <form className="form" onSubmit={loadContract}>
                 <input type="text" placeholder=" CONTRACT ADDRESS HERE!" onChange={handleLoadAddressChange}></input><br></br>

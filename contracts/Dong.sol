@@ -22,7 +22,7 @@ contract basic_dong {
         uint256 _contributors,
         string memory _name
     ) {
-        creator = msg.sender;
+        creator = 0x7599d1DB45B881A80c66FD6A02144c65E553a9E2;
         beneficiary = _beneficiary;
         beneficiaryName = _name;
         remainingAmount = _totalAmount * 1e18;

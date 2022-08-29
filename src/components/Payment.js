@@ -31,23 +31,26 @@ const Payment = () => {
             try {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
+            console.log("Successfully got the provider and the signer");
 
             const contract = new ethers.Contract(id, DongAbi.abi, signer);
+            console.log("Successfully initialized the contract instance");
             
             const response = await contract.payDong(name, {value: utils.parseEther(dong)});
-        
-            console.log("response: ", response);
-        
+            console.log("Receipt", response);
+
+            console.log("Waiting for the transaction to be submitted on the Blockchain");
+
             setTimeout(() => {
-                console.log("Updating data after 20 seconds");
                 fetchData();
+                alert("Congrats! You have paid your share successfully :)");
             }, 20000);
-        
+            
             } catch (err) {
-                console.log("error: ", err);
+                console.log(err);
             }
         } else {
-            console.log("Metamask does not exist!");
+            console.log("Please use your phone's Metamask app to interact with this platform");
         }
     }
 
@@ -60,35 +63,40 @@ const Payment = () => {
 
         const beneficiary_name = await instance.beneficiaryName();
         setBeneficiaryName(beneficiary_name);
+        console.log(`Beneficiary name fetched: ${beneficiary_name}`);
 
         const dongValue = await instance.dong();
         setDong(utils.formatEther(dongValue));
+        console.log(`Dong value fetched: ${utils.formatEther(dongValue)} MATIC`);
 
         const totalEngaged = await instance.payment(account);
         setEngaged(utils.formatEther(totalEngaged));
+        console.log(`Total engaged fetched: ${utils.formatEther(totalEngaged)} MATIC`);
 
         const totalRemaining = await instance.remainingAmount();
         setTotalRemainingAmount(utils.formatEther(totalRemaining));
+        console.log(`Total remaining fetched: ${utils.formatEther(totalRemaining)} MATIC`);
 
         const totalContributors = await instance.contributors();
         setContributors(totalContributors.toNumber());
+        console.log(`Total contributors fetched: ${totalContributors.toNumber()}`);
 
-        const helper = totalContributors - (totalRemaining/dongValue);
+        const payersCounter = totalContributors - (totalRemaining/dongValue);
+        // const result = await instance.names(2);
+        console.log(payersCounter);
 
-        for(let i = 1; i <= helper; i++) {
-            const result = await instance.names(i);
-            console.log(`Participant ${i}: ${result}`);
-            if (people.includes(result) === false) {
-                people.push(result);
+        if (payersCounter == 0) {
+            return
+        } else {
+            for(let i = 1; i <= payersCounter; i++) {
+                const result = await instance.names(i);
+                console.log(`Participant ${i}: ${result}`);
+                if (people.includes(result) === false) {
+                    people.push(result);
+                }
             }
         }
-        console.log(people);
     }
-
-
-    useEffect(() => { 
-        fetchData();
-    })
 
 
     let image = "";
@@ -98,6 +106,7 @@ const Payment = () => {
         image = null
     }
 
+    fetchData();
 
     return (
         <div className="background">
@@ -107,6 +116,7 @@ const Payment = () => {
             <WalletInformation></WalletInformation>
 
             <div className="App">
+                <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -144,14 +154,7 @@ const Payment = () => {
                 <div className="div0">
                     <p>Total contributors: {contributors}</p>
                 </div>
-            </div>
-
-
-            {/* <button className="button" onClick={loadContract}>REFRESH DATA</button> */}
-            
-
-
-
+            </div>            
         </div>
     );
 }

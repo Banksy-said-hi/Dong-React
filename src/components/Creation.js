@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { ethers, Wallet } from "ethers";
+import { ethers } from "ethers";
 import DongAbi from "../DongAbi.json";
 import DongbyteCode from "../DongByteCode.json";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,10 +25,10 @@ function Creation() {
                 setDeploymentMessage("CONNECTING WALLET");
                 const result = await window.ethereum.request({method: "eth_requestAccounts"});
                 address = result[0];
-                console.log(address)
+                console.log(`Connected wallet address: ${address}`);
                 setDeploymentMessage("WALLET IS CONNECTED");
             } catch {
-                alert("cannot retreive user address from the provider");
+                alert("cannot connect the wallet to the Dapp");
             }
 
             if (beneficiaryName && amount && contributors) {
@@ -39,39 +39,33 @@ function Creation() {
                     console.log("Successfully got the provider and signer");
 
                     const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
-                    console.log("works fine untill here");
+                    console.log("Successfully got the ContractFactory");
+                    
                     const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
                     console.log("Trying to deploy the contract");
-                    setDeploymentMessage("IT TAKES 20 SEC");
+                    setDeploymentMessage("PLEASE WAIT ABOUT 20 SEC");
 
                     const transactionReceipt = await newDongContract.deployTransaction.wait();
-                    // setNewContract(transactionReceipt.contractAddress);
                     console.log("Contract was deployed successfully!");
                     setDeploymentMessage("SUCCESSFULY DEPLOYED");
 
                     console.log(`Contract Address: ${transactionReceipt.contractAddress}`);
                     console.log(`Gas consumption: ${transactionReceipt.gasUsed.toString()}`);
-                    console.log("Transaction Receipt below:");
-                    console.log(transactionReceipt);
 
-                    // dispatch({type: "SET",payload: transactionReceipt.contractAddress});
-                    console.log("works fine to here!!!");
-                    setTimeout(() => {
-                        setDeploymentMessage("CREATE");
-                    }, 2000)
+                    console.log("Heading to the payment page!");
                     
                     navigate(`/payment/${transactionReceipt.contractAddress}`);
 
                 } catch {
-                    alert("Failed in contract deployment");
+                    alert("Failed in contract deployment! Check the console for more details");
                     setDeploymentMessage("CREATE");
                 }
             } else {
-                alert("Sotun, first you need to fill all three inputs correctly !");
+                alert("You need to fill out all three inputs to deploy your contract");
                 setDeploymentMessage("CREATE");
             }
         } else {
-            alert("Dadashe golam! Az Metamask wallet e gushit estefade kon!")
+            alert("Please use your phone's Metamask app to interact with this platform");
         }
     }
 
@@ -83,6 +77,7 @@ function Creation() {
             <WalletInformation></WalletInformation>
 
             <form className="form" onSubmit={handleContractCreation}>
+                <p>Provide this information to create your bill</p>
                 <input type="text" placeholder="Your name" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
                 <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
                 <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>

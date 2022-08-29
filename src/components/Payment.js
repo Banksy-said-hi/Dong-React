@@ -8,9 +8,14 @@ import QRCode from "react-qr-code";
 
 const Payment = () => {
 
+    console.log("start");
+
     const { id } = useParams();
 
+    const [payDongButton, setPayDongButton] = useState("PAY");
+
     const [people] = useState([]);
+    const [people2] = useState(["Hary", "Son", "Loris"]);
 
     const [name, setName] = useState(null);
     const [totalRemainingAmount, setTotalRemainingAmount] = useState(null);
@@ -27,6 +32,7 @@ const Payment = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (window.ethereum) {
+            setPayDongButton("WORKING ...");
             console.log(`${name} is trying to pay ${dong} Matic tokens`)
             try {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -43,6 +49,7 @@ const Payment = () => {
 
             setTimeout(() => {
                 fetchData();
+                setPayDongButton("PAY");
                 alert("Congrats! You have paid your share successfully :)");
             }, 20000);
             
@@ -56,47 +63,42 @@ const Payment = () => {
 
 
     const fetchData = async () => {
-        const response = await window.ethereum.request({ method: "eth_requestAccounts" })
+        const response = await window.ethereum.request({ method: "eth_requestAccounts" });
         const account = response[0];
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const instance = new ethers.Contract(id, DongAbi.abi, provider);
 
         const beneficiary_name = await instance.beneficiaryName();
-        setBeneficiaryName(beneficiary_name);
         console.log(`Beneficiary name fetched: ${beneficiary_name}`);
 
         const dongValue = await instance.dong();
-        setDong(utils.formatEther(dongValue));
         console.log(`Dong value fetched: ${utils.formatEther(dongValue)} MATIC`);
 
         const totalEngaged = await instance.payment(account);
-        setEngaged(utils.formatEther(totalEngaged));
         console.log(`Total engaged fetched: ${utils.formatEther(totalEngaged)} MATIC`);
 
         const totalRemaining = await instance.remainingAmount();
-        setTotalRemainingAmount(utils.formatEther(totalRemaining));
         console.log(`Total remaining fetched: ${utils.formatEther(totalRemaining)} MATIC`);
 
         const totalContributors = await instance.contributors();
-        setContributors(totalContributors.toNumber());
         console.log(`Total contributors fetched: ${totalContributors.toNumber()}`);
 
         const payersCounter = totalContributors - (totalRemaining/dongValue);
-        // const result = await instance.names(2);
         console.log(`${payersCounter} people have contributed so far`);
 
-        if (payersCounter == 0) {
-            return
-        } else {
-            for(let i = 1; i <= payersCounter; i++) {
-                const result = await instance.names(i);
-                console.log(`Participant ${i}: ${result}`);
-                if (people.includes(result) == false) {
-                    people.push(result);
-                    // console.log(people);
-                }
+        for(let i = 1; i <= payersCounter; i++) {
+            const result = await instance.names(i);
+            console.log(`Participant ${i}: ${result}`);
+            if (people.includes(result) == false) {
+                people.push(result);
             }
         }
+
+        setBeneficiaryName(beneficiary_name);
+        setDong(utils.formatEther(dongValue));
+        setEngaged(utils.formatEther(totalEngaged));
+        setTotalRemainingAmount(utils.formatEther(totalRemaining));
+        setContributors(totalContributors.toNumber());
     }
     
 
@@ -112,7 +114,9 @@ const Payment = () => {
         image = null
     }
 
-    const mappedPeople = people.map((item, index) => <h2 key={index}>{item}</h2>)
+    // console.log(people)
+
+    console.log("finish");
 
     return (
         <div className="background">
@@ -120,11 +124,10 @@ const Payment = () => {
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <hr className="hr"></hr>
             <WalletInformation></WalletInformation>
-
             <div className="App">
                 <br></br>
                 <br></br>
-                <br></br>
+                <p>Your friends will be directed to the current page by scanning this QRCode</p>
                 <br></br>
                 <div>{image}</div>
             </div>
@@ -132,7 +135,7 @@ const Payment = () => {
             <form className="form" onSubmit={handleSubmit}>
                 <h1>Write your name and submit</h1>
                 <input type="text" placeholder="Name" onChange={handleChange}></input><br></br>
-                <input className="creation-button" type="submit" value="PAY DONG"></input><br></br>
+                <input className="creation-button" type="submit" value={payDongButton}></input><br></br>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -141,24 +144,24 @@ const Payment = () => {
 
             <div className="App background">
                 <div className="div0">
-                    <p>Beneficiary Name:<br></br><b>{beneficiaryName}</b></p>
-                    <p>Your share: <br></br><b>{dong}</b></p>
+                    <p>Beneficiary name:<br></br><b>{beneficiaryName}</b></p>
+                    <p>Your Share: <br></br><b>{dong} MATIC</b></p>
                 </div>
 
                 <div className="div0">
-                    People who have paid: {mappedPeople} 
+                    Payers' names {people.map((item, index) => <h2 key={index}>{item}</h2>)}
                 </div>
 
                 <div className="div0">
-                    <p className="text">You have paid: {engaged} Matic</p>
+                    <p className="text">You have paid: <b>{engaged}</b> MATIC</p>
                 </div>
 
                 <div className="div0">
-                    <p className="text">Total remaining amount: {totalRemainingAmount} Matic</p>
+                    <p className="text">Remaining amount: <b>{totalRemainingAmount}</b> MATIC</p>
                 </div>
 
                 <div className="div0">
-                    <p>Total contributors: {contributors}</p>
+                    <p>Contributors: <b>{contributors}</b></p>
                 </div>
             </div>            
         </div>

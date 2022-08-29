@@ -77,7 +77,7 @@ function Creation() {
             <WalletInformation></WalletInformation>
 
             <form className="form" onSubmit={handleContractCreation}>
-                <p>Provide this information to create your bill</p>
+                <p>Fill out this form to create your bill</p>
                 <input type="text" placeholder="Your name" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
                 <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
                 <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>

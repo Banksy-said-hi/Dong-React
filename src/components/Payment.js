@@ -83,7 +83,7 @@ const Payment = () => {
 
         const payersCounter = totalContributors - (totalRemaining/dongValue);
         // const result = await instance.names(2);
-        console.log(payersCounter);
+        console.log(`${payersCounter} people have contributed so far`);
 
         if (payersCounter == 0) {
             return
@@ -91,12 +91,18 @@ const Payment = () => {
             for(let i = 1; i <= payersCounter; i++) {
                 const result = await instance.names(i);
                 console.log(`Participant ${i}: ${result}`);
-                if (people.includes(result) === false) {
+                if (people.includes(result) == false) {
                     people.push(result);
+                    // console.log(people);
                 }
             }
         }
     }
+    
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
 
     let image = "";
@@ -106,7 +112,7 @@ const Payment = () => {
         image = null
     }
 
-    fetchData();
+    const mappedPeople = people.map((item, index) => <h2 key={index}>{item}</h2>)
 
     return (
         <div className="background">
@@ -140,7 +146,7 @@ const Payment = () => {
                 </div>
 
                 <div className="div0">
-                    People who have paid: {people.map((item, index) => <h2 key={index}>{index+1}- {item}</h2>)}
+                    People who have paid: {mappedPeople} 
                 </div>
 
                 <div className="div0">

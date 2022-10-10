@@ -18,7 +18,7 @@ function Home() {
 
             <Link className="link" to="./creation">
                 <div className="home-card">
-                    <h1>Create your bill</h1>
+                    <h1>Create Dong</h1>
                     <h4>Click here to set up a bill for your group</h4>
                     <img className="home-image" src={admin}></img>
                 </div>

@@ -14,12 +14,47 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Dong = await hre.ethers.getContractFactory("basic_dong");
-  const dong = await Dong.deploy("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 12, 4, "Kami");
+  const Dong = await hre.ethers.getContractFactory("Dong");
+  const dong = await Dong.deploy("0x7599d1DB45B881A80c66FD6A02144c65E553a9E2", 10, 8, "Kami");
 
   await dong.deployed();
 
   console.log("Dong deployed to:", dong.address);
+
+  console.log("=============================================");
+
+  console.log("Retrieving our account!");
+  const accounts = await ethers.getSigners();
+  const balance = await accounts[0].getBalance();
+  console.log(ethers.utils.formatEther(balance));
+  console.log("Successfull")
+
+  console.log("=============================================");
+
+  console.log("Retrieving stored data!");
+
+  const response = await dong.totalDollarAmount();
+  console.log(`(1)-Bill in dollar: $${response}`);
+
+  const response1 = await dong.contributors();
+  console.log(`(2)-Contributors: ${response1} people`);
+
+  const response2 = await dong.maticPrice();
+  console.log(`(3)-Matic price: ${response2/1e8} dollars`);
+
+  const response3 = await dong.remainingDongInMatic();
+  console.log(`(4)-Total remiaing Dong in Matic: ${response3/100} MATIC`);
+
+  const response4 = await dong.dongInMatic();
+  console.log(`(5)-Each member has to pay ${response4/100} MATIC`);
+
+  console.log("=============================================");
+
+  console.log("Trying to pay a Dong");
+
+  // await dong.payDong("Sina", {value: 1000}).then((x) => console.log(x));
+
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

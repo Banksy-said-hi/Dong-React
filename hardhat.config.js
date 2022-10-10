@@ -21,6 +21,9 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
+  paths: {
+    artifacts: "./src/artifacts"
+  },
   // defaultNetwork: "matic",
   // networks: {
   //   hardhat: {
@@ -30,7 +33,7 @@ module.exports = {
   //     accounts: [process.env.PRIVATE_KEY]
   //   }
   // },
-  solidity: "0.8.0",
+  solidity: "0.8.9",
   networks: {
     mumbai: {
       url: API_URL,

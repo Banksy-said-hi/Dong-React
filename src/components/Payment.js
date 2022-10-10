@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from "react";
-import {ethers, utils} from "ethers";
-import DongAbi from "../DongAbi.json";
+import {BigNumber, ethers, FixedNumber, utils} from "ethers";
+import Dong from "../artifacts/contracts/Dong.sol/Dong.json";
 import { Link, useParams } from "react-router-dom";
 import WalletInformation from "./WalletInformation";
 import QRCode from "react-qr-code";
@@ -8,14 +8,11 @@ import QRCode from "react-qr-code";
 
 const Payment = () => {
 
-    console.log("start");
-
     const { id } = useParams();
 
     const [payDongButton, setPayDongButton] = useState("PAY");
 
     const [people] = useState([]);
-    const [people2] = useState(["Hary", "Son", "Loris"]);
 
     const [name, setName] = useState(null);
     const [totalRemainingAmount, setTotalRemainingAmount] = useState(null);
@@ -30,6 +27,8 @@ const Payment = () => {
     };
 
     const handleSubmit = async (event) => {
+        // Put this function under a try catch tree
+        // Warning
         event.preventDefault();
         if (window.ethereum) {
             setPayDongButton("WORKING ...");
@@ -39,10 +38,16 @@ const Payment = () => {
             const signer = provider.getSigner();
             console.log("Successfully got the provider and the signer");
 
-            const contract = new ethers.Contract(id, DongAbi.abi, signer);
+            const contract = new ethers.Contract(id, Dong.abi, signer);
             console.log("Successfully initialized the contract instance");
-            
-            const response = await contract.payDong(name, {value: utils.parseEther(dong)});
+
+
+            // We have a problem here
+            // The smart contract does not accept this amount as the value
+            // It shows something related to converstion between BigNumber and String
+            // Try to pay a dong under a specific name and observe the error
+            const decimal = 100;
+            const response = await contract.payDong(name, {value: "100000"});
             console.log("Receipt", response);
 
             console.log("Waiting for the transaction to be submitted on the Blockchain");
@@ -66,38 +71,40 @@ const Payment = () => {
         const response = await window.ethereum.request({ method: "eth_requestAccounts" });
         const account = response[0];
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const instance = new ethers.Contract(id, DongAbi.abi, provider);
+        const instance = new ethers.Contract(id, Dong.abi, provider);
 
         const beneficiary_name = await instance.beneficiaryName();
         console.log(`Beneficiary name fetched: ${beneficiary_name}`);
 
-        const dongValue = await instance.dong();
-        console.log(`Dong value fetched: ${utils.formatEther(dongValue)} MATIC`);
+        const dongValue = await instance.dongInMatic();
+        console.log(`Dong value fetched: ${dongValue/100} MATIC`);
 
         const totalEngaged = await instance.payment(account);
-        console.log(`Total engaged fetched: ${utils.formatEther(totalEngaged)} MATIC`);
+        console.log(`Total engaged fetched: ${totalEngaged/100} MATIC`);
 
-        const totalRemaining = await instance.remainingAmount();
-        console.log(`Total remaining fetched: ${utils.formatEther(totalRemaining)} MATIC`);
+        const totalRemaining = await instance.remainingDongInMatic();
+        console.log(`Total remaining fetched: ${totalRemaining/100} MATIC`);
 
         const totalContributors = await instance.contributors();
         console.log(`Total contributors fetched: ${totalContributors.toNumber()}`);
 
-        const payersCounter = totalContributors - (totalRemaining/dongValue);
-        console.log(`${payersCounter} people have contributed so far`);
+        // const payersCounter = totalContributors - (totalRemaining/dongValue);
+        // console.log(`${payersCounter} people have contributed so far`);
 
-        for(let i = 1; i <= payersCounter; i++) {
+        for(let i = 0; i < totalContributors; i++) {
             const result = await instance.names(i);
-            console.log(`Participant ${i}: ${result}`);
-            if (people.includes(result) == false) {
-                people.push(result);
+            if (result) {
+                console.log(`Participant ${i}: ${result}`);
+                if (people.includes(result) == false) {
+                    people.push(result);
+                }
             }
         }
 
         setBeneficiaryName(beneficiary_name);
-        setDong(utils.formatEther(dongValue));
-        setEngaged(utils.formatEther(totalEngaged));
-        setTotalRemainingAmount(utils.formatEther(totalRemaining));
+        setDong(dongValue/100);
+        setEngaged(totalEngaged/100);
+        setTotalRemainingAmount(totalRemaining/100);
         setContributors(totalContributors.toNumber());
     }
     
@@ -114,9 +121,6 @@ const Payment = () => {
         image = null
     }
 
-    // console.log(people)
-
-    console.log("finish");
 
     return (
         <div className="background">

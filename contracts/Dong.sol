@@ -1,61 +1,89 @@
-pragma solidity 0.8.0;
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.9;
 
-contract basic_dong {
-    string public beneficiaryName;
+// Import this file to use console.log
+import "hardhat/console.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-    address public beneficiary;
-    address private creator;
+// TODO:
 
-    uint256 public remainingAmount;
-    uint256 public contributors;
-    uint256 public dong;
+contract Dong {
+    AggregatorV3Interface internal priceFeed;
+
+    int256 public maticPrice;
+    int256 public maticPriceDecimal = 1e8;
+
+    int256 public dongDecimal = 1e2;
+    // RemiaingDongInMatic has two decimals for precision
+    int256 public remainingDongInMatic;
+    // dongInMatic is intentionally multiplied by 100 for precision
+    int256 public dongInMatic;
+
+    int256 public totalDollarAmount;
+    int256 public contributors;
     uint256 public counter;
+
+    string public beneficiaryName;
+    address public beneficiary;
 
     bool public finished;
 
-    mapping(address => uint256) public payment;
+    mapping(address => int256) public payment;
     mapping(uint256 => string) public names;
 
     constructor(
         address _beneficiary,
-        uint256 _totalAmount,
-        uint256 _contributors,
-        string memory _name
+        int256 _totalDollarAmount,
+        int256 _contributors,
+        string memory _beneficiaryName
     ) {
-        creator = 0x7599d1DB45B881A80c66FD6A02144c65E553a9E2;
+        priceFeed = AggregatorV3Interface(
+            0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
+        );
+
         beneficiary = _beneficiary;
-        beneficiaryName = _name;
-        remainingAmount = _totalAmount * 1e18;
+        totalDollarAmount = _totalDollarAmount;
         contributors = _contributors;
-        dong = (_totalAmount * 1e18) / contributors;
+        beneficiaryName = _beneficiaryName;
+
+        maticPrice = getLatestPrice();
+
+        // RemiaingDongInMatic has two decimals for precision
+        remainingDongInMatic =
+            (totalDollarAmount * maticPriceDecimal * dongDecimal) /
+            maticPrice;
+
+        // dongInMatic is intentionally multiplied by 100 for precision
+        dongInMatic = (105 * (remainingDongInMatic / contributors)) / 100;
     }
 
-    function payDong(string memory _name) public payable {
-        require(msg.value >= dong, "msg.value must be at least equal to dong");
+    function getLatestPrice() public view returns (int256) {
+        (
+            ,
+            /*uint80 roundID*/
+            int256 price,
+            ,
+            ,
+
+        ) = priceFeed.latestRoundData(); /*uint80 answeredInRound*/ /*uint timeStamp*/ /*uint startedAt*/
+        return price;
+    }
+
+    function payDong(string calldata _name) public payable {
+        // require(
+        //     int256(msg.value) == dongInMatic,
+        //     "msg.value must be at least equal to dong"
+        // );
         require(finished == false, "The process has already been finished");
 
-        uint256 reversal;
-        uint256 net;
+        remainingDongInMatic -= int256(msg.value);
+        payment[msg.sender] += int256(msg.value);
 
-        if (msg.value <= remainingAmount) {
-            reversal = msg.value % dong;
-            net = msg.value - reversal;
-        } else {
-            reversal = msg.value - remainingAmount;
-            net = remainingAmount;
-        }
-
-        remainingAmount -= net;
-        payment[msg.sender] += net;
-
-        counter += 1;
         names[counter] = _name;
+        counter += 1;
 
-        payable(msg.sender).transfer(reversal);
-
-        if (remainingAmount == 0) {
-            payable(beneficiary).transfer((9 * (address(this).balance)) / 10);
-            payable(creator).transfer(address(this).balance);
+        if (counter == uint256(contributors)) {
+            payable(beneficiary).transfer(address(this).balance);
             finished = true;
         }
     }

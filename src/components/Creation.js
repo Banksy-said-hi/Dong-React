@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import { ethers } from "ethers";
-import DongAbi from "../DongAbi.json";
-import DongbyteCode from "../DongByteCode.json";
 import { Link, useNavigate } from "react-router-dom";
 import WalletInformation from "./WalletInformation.js";
+import Dong from "../artifacts/contracts/Dong.sol/Dong.json";
 
 
 function Creation() {
@@ -38,12 +37,19 @@ function Creation() {
                     const signer = provider.getSigner();
                     console.log("Successfully got the provider and signer");
 
-                    const factory = new ethers.ContractFactory(DongAbi.abi, DongbyteCode.byteCode, signer);
+                    const factory = new ethers.ContractFactory(Dong.abi, Dong.bytecode, signer);
                     console.log("Successfully got the ContractFactory");
                     
+                    console.log(`Trying to create a contract with these parameters:`)
+                    console.log(`Address: ${address}`);
+                    console.log(`Name: ${beneficiaryName}`);
+                    console.log(`Bill in dollar: $${amount}`);
+                    console.log(`Contributors: ${contributors} people`);
+
+                
                     const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
                     console.log("Trying to deploy the contract");
-                    setDeploymentMessage("PLEASE WAIT ABOUT 20 SEC");
+                    setDeploymentMessage("PLEASE WAIT 20 SEC");
 
                     const transactionReceipt = await newDongContract.deployTransaction.wait();
                     console.log("Contract was deployed successfully!");
@@ -79,7 +85,7 @@ function Creation() {
             <form className="form" onSubmit={handleContractCreation}>
                 <p>Fill out this form to create your bill</p>
                 <input type="text" placeholder="Your name" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
-                <input type="text" placeholder="Bill amount" onChange={(x) => setAmount(x.target.value)}></input>
+                <input type="text" placeholder="Bill amount in dollar" onChange={(x) => setAmount(x.target.value)}></input>
                 <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>
                 <br></br>
                 <input className="creation-button" type="submit" value={deploymentMessage}></input>

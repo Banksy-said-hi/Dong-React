@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import admin from "../images/admin.png";
-import group from "../images/group.png";
-
 
 
 function Home() {

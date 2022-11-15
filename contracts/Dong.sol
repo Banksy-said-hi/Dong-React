@@ -70,10 +70,6 @@ contract Dong {
     }
 
     function payDong(string calldata _name) public payable {
-        // require(
-        //     int256(msg.value) == dongInMatic,
-        //     "msg.value must be at least equal to dong"
-        // );
         require(finished == false, "The process has already been finished");
 
         remainingDongInMatic -= int256(msg.value);

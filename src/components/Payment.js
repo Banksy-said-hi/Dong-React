@@ -42,14 +42,12 @@ const Payment = () => {
             console.log("Successfully initialized the contract instance");
 
 
-            // We have a problem here
-            // The smart contract does not accept this amount as the value
-            // It shows something related to converstion between BigNumber and String
-            // Try to pay a dong under a specific name and observe the error
-            const decimal = 100;
-            const response = await contract.payDong(name, {value: "100000"});
-            console.log("Receipt", response);
 
+            console.log(`dong is ${dong} Matics`);
+            const response = await contract.payDong(name, { value: ethers.utils.parseEther(dong.toString()) });
+
+
+            console.log("Receipt", response);
             console.log("Waiting for the transaction to be submitted on the Blockchain");
 
             setTimeout(() => {
@@ -60,6 +58,7 @@ const Payment = () => {
             
             } catch (err) {
                 console.log(err);
+                setPayDongButton("PAY");
             }
         } else {
             console.log("Please use your phone's Metamask app to interact with this platform");
@@ -80,10 +79,10 @@ const Payment = () => {
         console.log(`Dong value fetched: ${dongValue/100} MATIC`);
 
         const totalEngaged = await instance.payment(account);
-        console.log(`Total engaged fetched: ${totalEngaged/100} MATIC`);
+        console.log(`Total engaged fetched: ${ethers.utils.formatEther(totalEngaged)} MATICs`);
 
         const totalRemaining = await instance.remainingDongInMatic();
-        console.log(`Total remaining fetched: ${totalRemaining/100} MATIC`);
+        console.log(`Total remaining fetched: ${ethers.utils.formatEther(totalRemaining)} MATICs`);
 
         const totalContributors = await instance.contributors();
         console.log(`Total contributors fetched: ${totalContributors.toNumber()}`);
@@ -94,7 +93,7 @@ const Payment = () => {
         for(let i = 0; i < totalContributors; i++) {
             const result = await instance.names(i);
             if (result) {
-                console.log(`Participant ${i}: ${result}`);
+                console.log(`Participant ${i+1}: ${result}`);
                 if (people.includes(result) == false) {
                     people.push(result);
                 }
@@ -103,8 +102,11 @@ const Payment = () => {
 
         setBeneficiaryName(beneficiary_name);
         setDong(dongValue/100);
-        setEngaged(totalEngaged/100);
-        setTotalRemainingAmount(totalRemaining/100);
+        setEngaged(ethers.utils.formatEther(totalEngaged));
+        // The next line is retrieving wrong information
+        // Inspect the problem and look for the origin
+        // It may be caused by a miscalculation somewhere in the contract
+        setTotalRemainingAmount(ethers.utils.formatEther(totalRemaining));
         setContributors(totalContributors.toNumber());
     }
     
@@ -128,17 +130,16 @@ const Payment = () => {
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <hr className="hr"></hr>
             <WalletInformation></WalletInformation>
-            <div className="App">
+            {/* <div className="App">
                 <br></br>
                 <br></br>
                 <p>Your friends will be directed to the current page by scanning this QRCode</p>
                 <br></br>
                 <div>{image}</div>
-            </div>
+            </div> */}
 
             <form className="form" onSubmit={handleSubmit}>
-                <h1>Write your name and submit</h1>
-                <input type="text" placeholder="Name" onChange={handleChange}></input><br></br>
+                <input type="text" placeholder="Write your name here and click pay" onChange={handleChange}></input><br></br>
                 <input className="creation-button" type="submit" value={payDongButton}></input><br></br>
                 <br></br>
                 <br></br>

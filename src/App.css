@@ -2,8 +2,8 @@
   text-align: center;
   margin-bottom: 30px;
   /* min-height: 150vh;  */
-  /* background-color: hsl(220, 91%, 56%);
-  color: rgb(5, 10, 0); */
+  background-color: #900101; 
+  /* color: rgb(5, 10, 0); */ 
 }
 
 .App-logo {
@@ -40,7 +40,7 @@
   margin-top: 15px;
   margin-bottom: 15px;
   border-radius: 24px;
-  background-color: #56f9ec;
+  background-color: #9ff400;
   font-size: 16px;
 }
 
@@ -72,38 +72,58 @@
   padding-bottom: 15px;
 }
 
+.wallet-information {
+  text-align: center;
+  background-color: #329362;
+  padding-bottom: 5px;
+  font-size: 15px;
+}
+
+.navigator-card {
+  /* border: 5px rgb(160, 214, 199) solid; */
+  background-color: #329362;
+  text-align: center;
+  margin: 0;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 70px;
+  font-family: "Silkscreen";
+  font-weight: lighter;
+  color: white;
+}
 
 .form {
   text-align: center;
   padding-top: 60px;
   padding-bottom: 50px;
-  border: 5px rgb(160, 214, 199) solid;
-  background-color: rgb(160, 214, 199);
+  /* border: 5px rgb(160, 214, 199) solid; */
+  background-color: #329362;
 }
 
 .form h1 {
   font-family: "Silkscreen";
-  font-size: 20px;
+  font-size: 90px;
   color: white;
 }
 
 .form input[type="text"] {
   text-align: center;
   place-items: center;
-  width:90%;
-  height: 50px;
+  width: 60%;
+  height: 70px;
+  font-size: 22px;
   margin-top: 4px;
   border-radius: 13px;
   border: 2.5px solid #0acf0a;
 }
 
 .creation-button {
-  width: 90%;
-  height: 60px;
+  width: 20%;
+  height: 70px;
   background-color: #000000;
-  font-size: 18px;
-  border-radius: 5px;
-  margin-top: 10px;
+  font-size: 35px;
+  border-radius: 13px;
+  margin-top: 20px;
   font-family: "Silkscreen";
   color: #61dafb;
 }
@@ -161,19 +181,6 @@
   width: 100%;
 }
 
-.navigator-card {
-  border: 5px rgb(160, 214, 199) solid;
-  background-color: rgb(160, 214, 199);
-  text-align: center;
-  margin: 0;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  font-size: 50px;
-  font-family: "Silkscreen";
-  font-weight: lighter;
-  color: white;
-}
-
 .payment-card {
   border: 5px rgb(160, 214, 199) solid;
   background-color: #61dafb;
@@ -196,15 +203,8 @@
   width: 300px;
 }
 
-.wallet-information {
-  text-align: center;
-  background-color: #56f9ec;
-  padding-bottom: 5px;
-  font-size: 15px;
-}
-
 .background {
-  background-color: rgb(160, 214, 199);
+  background-color: #f3c495;
   height: 1000px;
 }
 
@@ -213,8 +213,16 @@
 }
 
 .home-background {
-  background-color: #56f9ec;
+  background-color: #e90707;
   min-height: 1000px;
+}
+
+.form p {
+  font-size: 30px;
+}
+
+.h3 {
+  text-align: center;
 }
 
 

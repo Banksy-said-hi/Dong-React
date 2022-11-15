@@ -43,13 +43,13 @@ function Creation() {
                     console.log(`Trying to create a contract with these parameters:`)
                     console.log(`Address: ${address}`);
                     console.log(`Name: ${beneficiaryName}`);
-                    console.log(`Bill in dollar: $${amount}`);
+                    console.log(`Bill amount in dollar: $${amount}`);
                     console.log(`Contributors: ${contributors} people`);
 
                 
                     const newDongContract = await factory.deploy(address, amount, contributors, beneficiaryName);
                     console.log("Trying to deploy the contract");
-                    setDeploymentMessage("PLEASE WAIT 20 SEC");
+                    setDeploymentMessage("PLEASE WAIT 20 SECONDS");
 
                     const transactionReceipt = await newDongContract.deployTransaction.wait();
                     console.log("Contract was deployed successfully!");
@@ -78,15 +78,15 @@ function Creation() {
 
     return (
         <div className="background">
+
             <Link className="link" to="/"><div className="navigator-card">Home</div></Link>
             <hr className="hr"></hr>
-            <WalletInformation></WalletInformation>
 
+            <WalletInformation></WalletInformation>
             <form className="form" onSubmit={handleContractCreation}>
-                <p>Fill out this form to create your bill</p>
-                <input type="text" placeholder="Your name" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
-                <input type="text" placeholder="Bill amount in dollar" onChange={(x) => setAmount(x.target.value)}></input>
-                <input type="text" placeholder="Size of the group" onChange={(x) => setContributors(x.target.value)}></input>
+                <input type="text" placeholder="What is your name? ( Enter a name )" onChange={(x) => setBeneficiaryName(x.target.value)}></input>
+                <input type="text" placeholder="How many dollars will be spent for your event? ( Enter a number )" onChange={(x) => setAmount(x.target.value)}></input>
+                <input type="text" placeholder="How many people want to pay a share? ( Enter a number )" onChange={(x) => setContributors(x.target.value)}></input>
                 <br></br>
                 <input className="creation-button" type="submit" value={deploymentMessage}></input>
             </form>
